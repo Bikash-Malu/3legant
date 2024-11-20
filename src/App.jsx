@@ -3,7 +3,7 @@ import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 import { Toaster } from 'sonner'
 import ForgotPassword from './components/auth/ForgetPassword'
-import Navbar from './components/common/Navbar'
+import Home from './components/Home'
 const appRouter = createBrowserRouter([
   {
     path: '/',
@@ -19,7 +19,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <Navbar />
+    element: <Home />
   },
 
 
