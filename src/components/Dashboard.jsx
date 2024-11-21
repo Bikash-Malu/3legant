@@ -72,7 +72,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex h-[100%] bg-gray-50 dark:bg-[#242424]">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">
       <LoadingBar
         color="#10B981"
         progress={progress}
