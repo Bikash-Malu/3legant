@@ -266,7 +266,7 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
-        <header className="flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
+        <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
           <Button
             variant="ghost"
             size="icon"

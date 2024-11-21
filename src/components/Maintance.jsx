@@ -9,6 +9,7 @@ const Maintance = () => {
   const location = useLocation(); 
 
   useEffect(() => {
+    NProgress.configure({ showSpinner: false });
     NProgress.start(); 
     setLoading(true); 
 
