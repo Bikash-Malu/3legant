@@ -6,7 +6,23 @@ import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { motion } from "framer-motion";
 import LoadingBar from "react-top-loading-bar";
-import { AlignVerticalJustifyEnd, Bell, Calendar, Grid, LayoutGrid, Menu, Plus, RefreshCcw, Repeat, Search, Settings, Star, Trash2, X } from 'lucide-react';
+import {
+  AlignVerticalJustifyEnd,
+  Bell,
+  Calendar,
+  Grid,
+  LayoutGrid,
+  Menu,
+  Notebook,
+  Plus,
+  RefreshCcw,
+  Repeat,
+  Search,
+  Settings,
+  Star,
+  Trash2,
+  X,
+} from "lucide-react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
@@ -18,7 +34,12 @@ export default function Dashboard() {
     { id: 1, text: "Buy groceries", completed: false, important: false },
     { id: 2, text: "Finish project report", completed: false, important: true },
     { id: 3, text: "Call the bank", completed: false, important: false },
-    { id: 4, text: "Schedule dentist appointment", completed: false, important: false },
+    {
+      id: 4,
+      text: "Schedule dentist appointment",
+      completed: false,
+      important: false,
+    },
     { id: 5, text: "Plan weekend trip", completed: false, important: false },
     { id: 6, text: "Read a book", completed: true, important: false },
     { id: 7, text: "Clean the house", completed: true, important: false },
@@ -145,7 +166,7 @@ export default function Dashboard() {
             </div>
             <div className="w-32 h-32 mx-auto">
               <CircularProgressbar
-                value={progress ||progressPercentage}
+                value={progress || progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
                 strokeWidth={16}
                 styles={buildStyles({
@@ -161,50 +182,56 @@ export default function Dashboard() {
 
       {/* Right Sidebar */}
       <div
-        className={`fixed z-30 top-0 right-0 transform transition-transform duration-300 ${
+        className={`fixed z-30 top-0 right-0 transform transition-transform duration-300 h-[100%] ${
           rightSidebarOpen ? "translate-x-0" : "translate-x-full"
         } w-64 border-l bg-white dark:bg-[#232323] p-4`}
       >
-      
         <div className="mb-8 h-full ">
-          <span className="text-sm border-b-2  text-black font-semibold dark:text-white mx-auto mb-3">
+          <span className="text-sm border-b-2 max-h-full  text-black font-semibold dark:text-white mx-auto mb-3">
             <div className="flex justify-between items-center mb-4">
               <div> </div>
-              <Button variant="ghost" size="icon"   onClick={() => setRightSidebarOpen(false)}>
-                <X className="h-6 w-6"  />
-              </Button>
+          
             </div>
             <ul className="space-y-4">
-  <li className="flex justify-between items-center border p-2   ">
-    <Checkbox checked />
-    <span>Buy groceries</span>
-    <Button variant="ghost" size="icon">
-      <Star className="h-4 w-4" />
-    </Button>
-  </li>
-  <li className="flex items-center gap-2 border-b-2 border-b-gray-700 p-1   ">
-    <Plus className="h-4 w-4" />
-    <span>Add Step</span>
-  </li>
-  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
-    <Bell className="h-4 w-4" />
-    <span>Set Reminder</span>
-  </li>
-  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
-    <Calendar className="h-4 w-4" />
-    <span>Add Due Date</span>
-  </li>
-  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
-    <Repeat className="h-4 w-4" />
-    <span>Repeat</span>
-  </li>
-  <li className="text-black font-samibold border-b-2 border-b-gray-700 p-1 dark:text-white   ">
-    <span>Add Notes</span>
-  </li>
-</ul>
+              <li className="flex justify-between items-center border p-2   ">
+                <Checkbox checked />
+                <span>Buy groceries</span>
+                <Button variant="ghost" size="icon">
+                  <Star className="h-4 w-4" />
+                </Button>
+              </li>
+              <li className="flex items-center gap-2 border-b-2 border-b-gray-700 p-1    ">
+                <Plus className="h-4 w-4" />
+                <span>Add Step</span>
+              </li>
+              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2  ">
+                <Bell className="h-4 w-4" />
+                <span>Set Reminder</span>
+              </li>
+              <li className="flex items-center  border-b-2 border-b-gray-700 p-1  space-x-2 ">
+                <Calendar className="h-4 w-4" />
+                <span>Add Due Date</span>
+              </li>
+              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2   ">
+                <Repeat className="h-4 w-4" />
+                <span>Repeat</span>
+              </li>
+              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2    ">
+                <Notebook className="h-4 w-4"/>
+                <span>Add Notes</span>
+              </li>
+            </ul>
 
-            <div className="flex justify-between items-center mt-8">
-              <span>Created Today</span>
+            <div className="flex justify-between w-[90%] items-center absolute bottom-0 mx-auto mb-5">
+            <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setRightSidebarOpen(false)}
+              >
+                <X className="h-6 w-6" />
+              </Button>
+              <div>Created Today</div>
+             
               <Button variant="ghost" size="icon">
                 <Trash2 className="h-4 w-4" />
               </Button>
