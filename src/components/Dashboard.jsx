@@ -237,7 +237,7 @@ export default function Dashboard() {
                 placeholder="Search..."
                 className={`${
                   isSearchOpen ? "w-full p-2" : "w-0"
-                } bg-transparent text-sm text-white dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
+                } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
                 style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
               />
               <button
