@@ -81,7 +81,7 @@ export default function Dashboard() {
       />
       {/* Sidebar */}
       <div
-        className={`fixed  min-h-screen lg:relative z-20 transform transition-transform duration-300 ${
+        className={`fixed  h-[100%] lg:relative z-20 transform transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } w-64 border-r bg-white dark:bg-[#232323] p-4 lg:translate-x-0`}
       >
