@@ -26,7 +26,7 @@ import {
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 export default function Dashboard() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -46,13 +46,25 @@ export default function Dashboard() {
     { id: 8, text: "Prepare presentation", completed: true, important: false },
     { id: 9, text: "Update blog", completed: true, important: false },
   ]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value); // Update search query
+
+  };
+
   const completedTasks = tasks.filter((task) => task.completed).length;
   const totalTasks = tasks.length;
   const progressPercentage = (completedTasks / totalTasks) * 100;
+  const location = useLocation();
+
+  const getActiveClass = (path) =>
+    location.pathname === path
+      ? "bg-[#35793729] text-green-400 dark:bg-[#35793729] dark:text-green-400"
+      : "bg-transparent text-[#232323] dark:text-white";
 
   useEffect(() => {
     loadProgress();
@@ -118,30 +130,42 @@ export default function Dashboard() {
             </div>
 
             <nav className="space-y-2 bg-white dark:bg-[#232323]">
-              <Button
-                variant="ghost"
-                className="w-full justify-start gap-2 bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-500"
-              >
-                <LayoutGrid className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={"/task"}>All Tasks</Link>
-              </Button>
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <Calendar className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={"/today"}>Today</Link>
-              </Button>
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <Star className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={"/importance"}>Important</Link>
-              </Button>
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <Grid className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={"/planned"}>Planned</Link>
-              </Button>
-              <Button variant="ghost" className="w-full justify-start gap-2">
-                <AlignVerticalJustifyEnd className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={"/assign"}>Assigned to me</Link> 
-              </Button>
-            </nav>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start gap-2 ${getActiveClass("/task")}`}
+      >
+        <LayoutGrid className="h-4 w-4" />
+        <Link to="/task">All Tasks</Link>
+      </Button>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start gap-2 ${getActiveClass("/today")}`}
+      >
+        <Calendar className="h-4 w-4" />
+        <Link to="/today">Today</Link>
+      </Button>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start gap-2 ${getActiveClass("/importance")}`}
+      >
+        <Star className="h-4 w-4" />
+        <Link to="/importance">Important</Link>
+      </Button>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start gap-2 ${getActiveClass("/planned")}`}
+      >
+        <Grid className="h-4 w-4" />
+        <Link to="/planned">Planned</Link>
+      </Button>
+      <Button
+        variant="ghost"
+        className={`w-full justify-start gap-2 ${getActiveClass("/assign")}`}
+      >
+        <AlignVerticalJustifyEnd className="h-4 w-4" />
+        <Link to="/assign">Assigned to me</Link>
+      </Button>
+    </nav>
           </div>
 
           <Button
@@ -253,7 +277,7 @@ export default function Dashboard() {
           </Button>
 
           <div className="flex items-center gap-2 justify-end w-full">
-            <motion.div
+          <motion.div
               initial={{ width: 40 }}
               animate={{ width: isSearchOpen ? 200 : 40 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -261,10 +285,12 @@ export default function Dashboard() {
             >
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search tasks..."
                 className={`${
                   isSearchOpen ? "w-full p-2" : "w-0"
                 } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
+                value={searchQuery}
+                onChange={handleSearchChange}
                 style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
               />
               <button
@@ -286,6 +312,7 @@ export default function Dashboard() {
           </div>
         </header>
         <main className="p-6">
+          
           <Outlet />
         </main>
       </div>
