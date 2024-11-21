@@ -13,7 +13,7 @@ const Today = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-[#232323]">
+    <div className="flex flex-col items-center justify-center h-screen dark:bg-[#232323] bg-white">
       {loading ? (
         // Show the loading spinner during loading state
         <TailSpin
