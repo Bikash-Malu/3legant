@@ -222,7 +222,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-2 justify-end w-full">
             <motion.div
               initial={{ width: 40 }}
-              animate={{ width: isSearchOpen ? 250 : 40 }}
+              animate={{ width: isSearchOpen ? 200 : 40 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
             >
