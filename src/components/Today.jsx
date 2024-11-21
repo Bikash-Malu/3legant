@@ -13,7 +13,7 @@ const Today = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen dark:bg-[#232323] bg-white">
+    <div className="flex flex-col items-center justify-center h-screen dark:bg-[#232323] bg-white p-4">
       {loading ? (
         // Show the loading spinner during loading state
         <TailSpin
@@ -26,16 +26,16 @@ const Today = () => {
       ) : (
         // Once loading is complete, show the content
         <>
-          <h1 className="text-5xl font-bold text-gray-800 dark:text-white mb-4">
+          <h1 className="text-3xl sm:text-5xl font-bold text-gray-800 dark:text-white mb-4 text-center">
             🚧 Under Maintenance 🚧
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 text-center">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 text-center mb-4">
             We are currently working hard to bring this page to life! <br />
             Please check back later.
           </p>
           <Link
             to="/"
-            className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-center block w-full sm:w-auto"
           >
             Go Back Home
           </Link>
