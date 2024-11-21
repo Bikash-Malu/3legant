@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import './App.css';
 import { ThemeProvider } from './theme/theme-provider'; // Ensure this path is correct
@@ -12,11 +12,15 @@ const appRouter = createBrowserRouter([
     element: <Dashboard />, // Dashboard as the parent route
     children: [
       {
+        path: '/', // Redirect to /task when visiting the root
+        element: <Navigate to="task" />,
+      },
+      {
         path: 'task', // Child route for tasks
         element: <Task />,
       },
       {
-        path: 'today', // Child route for tasks
+        path: 'today', // Child route for today page
         element: <Today />,
       },
     ],
