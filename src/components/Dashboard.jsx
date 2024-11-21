@@ -166,7 +166,7 @@ export default function Dashboard() {
             </div>
             <div className="w-32 h-32 mx-auto">
               <CircularProgressbar
-                value={progressPercentage}
+                value={progress||progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
                 strokeWidth={16}
                 styles={buildStyles({
