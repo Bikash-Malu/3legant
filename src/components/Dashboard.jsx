@@ -131,15 +131,15 @@ export default function Dashboard() {
               </Button>
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <Star className="h-4 w-4 text-[#232323] dark:text-white" />
-                Important
+                <Link to={"/importance"}>Important</Link>
               </Button>
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <Grid className="h-4 w-4 text-[#232323] dark:text-white" />
-                Planned
+                <Link to={"/planned"}>Planned</Link>
               </Button>
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <AlignVerticalJustifyEnd className="h-4 w-4 text-[#232323] dark:text-white" />
-                Assigned to me
+                <Link to={"/assign"}>Assigned to me</Link> 
               </Button>
             </nav>
           </div>

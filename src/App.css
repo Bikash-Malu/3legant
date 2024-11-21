@@ -1,4 +1,9 @@
 html {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+  /* Custom NProgress styles */
+#nprogress .bar {
+    background: #4fa94d !important; /* Loader color */
+    height: 4px; /* Bar height */
+  }
   
