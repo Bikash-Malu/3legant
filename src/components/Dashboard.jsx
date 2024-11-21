@@ -1,26 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { motion } from "framer-motion";
-import {
-  AlignVerticalJustifyEnd,
-  Bell,
-  Calendar,
-  Grid,
-  LayoutGrid,
-  Menu,
-  Plus,
-  RefreshCcw,
-  Repeat,
-  Search,
-  Settings,
-  Star,
-  Trash2,
-  X,
-} from "lucide-react";
+import LoadingBar from "react-top-loading-bar";
+import { AlignVerticalJustifyEnd, Bell, Calendar, Grid, LayoutGrid, Menu, Plus, RefreshCcw, Repeat, Search, Settings, Star, Trash2, X } from 'lucide-react';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
@@ -32,26 +18,46 @@ export default function Dashboard() {
     { id: 1, text: "Buy groceries", completed: false, important: false },
     { id: 2, text: "Finish project report", completed: false, important: true },
     { id: 3, text: "Call the bank", completed: false, important: false },
-    {
-      id: 4,
-      text: "Schedule dentist appointment",
-      completed: false,
-      important: false,
-    },
+    { id: 4, text: "Schedule dentist appointment", completed: false, important: false },
     { id: 5, text: "Plan weekend trip", completed: false, important: false },
     { id: 6, text: "Read a book", completed: true, important: false },
     { id: 7, text: "Clean the house", completed: true, important: false },
     { id: 8, text: "Prepare presentation", completed: true, important: false },
     { id: 9, text: "Update blog", completed: true, important: false },
   ]);
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [rightSidebarOpen, setRightSidebarOpen] = useState(false); // New state for the right sidebar
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const completedTasks = tasks.filter((task) => task.completed).length;
-  const progress = (completedTasks / tasks.length) * 100;
+  const totalTasks = tasks.length;
+  const progressPercentage = (completedTasks / totalTasks) * 100;
+
+  useEffect(() => {
+    loadProgress();
+  }, []);
+
+  const loadProgress = () => {
+    setProgress(0);
+    let progressInterval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
+          clearInterval(progressInterval);
+          return 100;
+        }
+        return prevProgress + 10;
+      });
+    }, 100);
+  };
 
   return (
     <div className="flex h-[100%] bg-gray-50 dark:bg-[#242424]">
+      <LoadingBar
+        color="#10B981"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+        className="z-50"
+      />
       {/* Sidebar */}
       <div
         className={`fixed lg:relative z-20 transform transition-transform duration-300 ${
@@ -139,8 +145,8 @@ export default function Dashboard() {
             </div>
             <div className="w-32 h-32 mx-auto">
               <CircularProgressbar
-                value={progress}
-                text={`${Math.round(progress)}%`}
+                value={progress ||progressPercentage}
+                text={`${Math.round(progressPercentage)}%`}
                 strokeWidth={16}
                 styles={buildStyles({
                   textColor: "#10B981",
