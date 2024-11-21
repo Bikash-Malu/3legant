@@ -166,7 +166,7 @@ export default function Dashboard() {
             </div>
             <div className="w-32 h-32 mx-auto">
               <CircularProgressbar
-                value={progress || progressPercentage}
+                value={progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
                 strokeWidth={16}
                 styles={buildStyles({
@@ -282,7 +282,6 @@ export default function Dashboard() {
             >
               <Grid className="h-6 w-6 text-green-600 dark:text-white" />
             </Button>
-
             <ModeToggle />
           </div>
         </header>

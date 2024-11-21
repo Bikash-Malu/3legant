@@ -21,9 +21,9 @@ export function ModeToggle() {
   return (
     <button onClick={toggleTheme} className="p-2 rounded-full bg-gray-200">
       {theme === 'light' ? (
-        <span className="text-gray-800">🌙</span> // Dark mode icon
+        <span className="text-gray-800">🌙</span> 
       ) : (
-        <span className="text-yellow-400">🌞</span> // Light mode icon
+        <span className="text-yellow-400">🌞</span> 
       )}
     </button>
   );

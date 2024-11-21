@@ -73,7 +73,7 @@ const Task = () => {
         // Show skeleton loaders while loading
         <div className="space-y-3">
           {Array.from({ length: 10 }).map((_, index) => (
-            <SkeletonTheme baseColor="#242424" highlightColor="#f5f5f5" key={index}>
+            <SkeletonTheme baseColor="#dbd9d9" highlightColor="#f5f5f5" key={index}>
               <Skeleton height={50} className="rounded" />
             </SkeletonTheme>
           ))}
