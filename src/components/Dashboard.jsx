@@ -84,7 +84,7 @@ export default function Dashboard() {
             </div>
 
             <nav className="space-y-2 bg-white dark:bg-[#232323]">
-              <Button variant="ghost" className="w-full justify-start gap-2">
+              <Button variant="ghost" className="w-full justify-start gap-2 bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-500">
                 <LayoutGrid className="h-4 w-4 text-[#232323] dark:text-white" />
                 <Link to={'/task'}>
                 All Tasks
@@ -92,7 +92,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="ghost"
-                className="w-full justify-start gap-2 bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-500"
+                className="w-full justify-start gap-2"
               >
                 <Calendar className="h-4 w-4 text-[#232323] dark:text-white" />
                 <Link to={'/'}>
