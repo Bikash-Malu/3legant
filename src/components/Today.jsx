@@ -35,7 +35,7 @@ const Today = () => {
           </p>
           <Link
             to="/"
-            className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-center block w-full sm:w-auto"
+            className="mt-6 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-400 dark:bg-gray-950 dark:hover:bg-gray-600 text-center block w-full sm:w-auto"
           >
             Go Back Home
           </Link>

@@ -6,7 +6,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { motion } from "framer-motion";
 import {
-    AlignVerticalJustifyEnd,
+  AlignVerticalJustifyEnd,
   Bell,
   Calendar,
   Grid,
@@ -14,9 +14,11 @@ import {
   Menu,
   Plus,
   RefreshCcw,
+  Repeat,
   Search,
   Settings,
   Star,
+  Trash2,
   X,
 } from "lucide-react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -44,6 +46,7 @@ export default function Dashboard() {
   ]);
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(false); // New state for the right sidebar
   const completedTasks = tasks.filter((task) => task.completed).length;
   const progress = (completedTasks / tasks.length) * 100;
 
@@ -51,7 +54,7 @@ export default function Dashboard() {
     <div className="flex h-[100%] bg-gray-50 dark:bg-[#242424]">
       {/* Sidebar */}
       <div
-        className={`fixed lg:relative z-20 transform transition-transform duration-300  ${
+        className={`fixed lg:relative z-20 transform transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } w-64 border-r bg-white dark:bg-[#232323] p-4 lg:translate-x-0`}
       >
@@ -79,25 +82,25 @@ export default function Dashboard() {
               </Avatar>
             </div>
             <div className="flex items-center gap-1 mb-6 justify-center">
-              <div className="text-sm text-muted-foreground dark:text-gray-300">Hey,</div>
-              <div className="font-medium dark:text-white text-black">Bikash</div>
+              <div className="text-sm text-muted-foreground dark:text-gray-300">
+                Hey,
+              </div>
+              <div className="font-medium dark:text-white text-black">
+                Bikash
+              </div>
             </div>
 
             <nav className="space-y-2 bg-white dark:bg-[#232323]">
-              <Button variant="ghost" className="w-full justify-start gap-2 bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-500">
-                <LayoutGrid className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={'/task'}>
-                All Tasks
-                </Link>
-              </Button>
               <Button
                 variant="ghost"
-                className="w-full justify-start gap-2"
+                className="w-full justify-start gap-2 bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-500"
               >
+                <LayoutGrid className="h-4 w-4 text-[#232323] dark:text-white" />
+                <Link to={"/task"}>All Tasks</Link>
+              </Button>
+              <Button variant="ghost" className="w-full justify-start gap-2">
                 <Calendar className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={'/today'}>
-                Today
-                </Link>
+                <Link to={"/today"}>Today</Link>
               </Button>
               <Button variant="ghost" className="w-full justify-start gap-2">
                 <Star className="h-4 w-4 text-[#232323] dark:text-white" />
@@ -123,9 +126,13 @@ export default function Dashboard() {
           </Button>
 
           <Card className="mt-8 p-4 mb-14 dark:bg-[#232323]">
-            <div className="mb-2 text-[#232323] dark:text-white">Today Tasks</div>
+            <div className="mb-2 text-[#232323] dark:text-white">
+              Today Tasks
+            </div>
             <div className="flex justify-between">
-              <div className="text-2xl font-bold mb-4 text-[#232323] dark:text-white">11</div>
+              <div className="text-2xl font-bold mb-4 text-[#232323] dark:text-white">
+                11
+              </div>
               <div className="bg-gray-300 dark:bg-green-500 h-5 w-5 text-center rounded-full text-white font-bold flex items-center justify-center">
                 !
               </div>
@@ -143,6 +150,60 @@ export default function Dashboard() {
               />
             </div>
           </Card>
+        </div>
+      </div>
+
+      {/* Right Sidebar */}
+      <div
+        className={`fixed z-30 top-0 right-0 transform transition-transform duration-300 ${
+          rightSidebarOpen ? "translate-x-0" : "translate-x-full"
+        } w-64 border-l bg-white dark:bg-[#232323] p-4`}
+      >
+      
+        <div className="mb-8 h-full ">
+          <span className="text-sm border-b-2  text-black font-semibold dark:text-white mx-auto mb-3">
+            <div className="flex justify-between items-center mb-4">
+              <div> </div>
+              <Button variant="ghost" size="icon"   onClick={() => setRightSidebarOpen(false)}>
+                <X className="h-6 w-6"  />
+              </Button>
+            </div>
+            <ul className="space-y-4">
+  <li className="flex justify-between items-center border p-2   ">
+    <Checkbox checked />
+    <span>Buy groceries</span>
+    <Button variant="ghost" size="icon">
+      <Star className="h-4 w-4" />
+    </Button>
+  </li>
+  <li className="flex items-center gap-2 border-b-2 border-b-gray-700 p-1   ">
+    <Plus className="h-4 w-4" />
+    <span>Add Step</span>
+  </li>
+  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
+    <Bell className="h-4 w-4" />
+    <span>Set Reminder</span>
+  </li>
+  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
+    <Calendar className="h-4 w-4" />
+    <span>Add Due Date</span>
+  </li>
+  <li className="flex items-center  border-b-2 border-b-gray-700 p-1   ">
+    <Repeat className="h-4 w-4" />
+    <span>Repeat</span>
+  </li>
+  <li className="text-black font-samibold border-b-2 border-b-gray-700 p-1 dark:text-white   ">
+    <span>Add Notes</span>
+  </li>
+</ul>
+
+            <div className="flex justify-between items-center mt-8">
+              <span>Created Today</span>
+              <Button variant="ghost" size="icon">
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+          </span>
         </div>
       </div>
 
@@ -177,20 +238,24 @@ export default function Dashboard() {
                 onClick={() => setIsSearchOpen((prev) => !prev)}
                 className="p-2"
               >
-                <Search className="w-5 h-5 text-gray-700 dark:text-white" />
+                <Search className="h-5 w-5 text-green-600 dark:text-white" />
               </button>
             </motion.div>
-            <Button variant="ghost" size="icon">
-              <Grid className="h-4 w-4 text-gray-700 dark:text-white" />
+
+            <Button
+              onClick={() => setRightSidebarOpen(true)}
+              variant="ghost"
+              size="icon"
+            >
+              <Grid className="h-6 w-6 text-green-600 dark:text-white" />
             </Button>
-          
+
             <ModeToggle />
           </div>
         </header>
-<div className="scroll-auto">
-  <Outlet/>
-</div>
-
+        <main className="p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

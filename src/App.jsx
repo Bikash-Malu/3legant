@@ -8,7 +8,7 @@ import Today from './components/Today';
 
 const appRouter = createBrowserRouter([
   {
-    path: '/',
+    path: '/', // Parent route for the Dashboard
     element: <Dashboard />, // Dashboard as the parent route
     children: [
       {
@@ -25,6 +25,7 @@ const appRouter = createBrowserRouter([
       },
     ],
   },
+
 ]);
 
 function App() {
