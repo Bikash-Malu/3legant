@@ -4,6 +4,7 @@ import './App.css';
 import { ThemeProvider } from './theme/theme-provider'; // Ensure this path is correct
 import Dashboard from './components/Dashboard';
 import Task from './components/Task'; // Ensure Task is imported correctly
+import Today from './components/Today';
 
 const appRouter = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const appRouter = createBrowserRouter([
       {
         path: 'task', // Child route for tasks
         element: <Task />,
+      },
+      {
+        path: 'today', // Child route for tasks
+        element: <Today />,
       },
     ],
   },

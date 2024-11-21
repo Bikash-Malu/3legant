@@ -95,7 +95,7 @@ export default function Dashboard() {
                 className="w-full justify-start gap-2"
               >
                 <Calendar className="h-4 w-4 text-[#232323] dark:text-white" />
-                <Link to={'/'}>
+                <Link to={'/today'}>
                 Today
                 </Link>
               </Button>
