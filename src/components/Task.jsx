@@ -66,7 +66,6 @@ const Task = () => {
       toast.error("Task cannot be empty!");
     }
   };
-  
 
   const toggleCalendar = () => {
     setCalendarVisible(!calendarVisible);
@@ -76,6 +75,10 @@ const Task = () => {
     setSelectedDate(date);
     setCalendarVisible(false); // Close calendar after selecting the date
     toast.success(`Selected Date: ${date.toLocaleDateString()}`); // Show toast notification
+  };
+
+  const handleCloseCalendar = () => {
+    setCalendarVisible(false); // Close the calendar when the close button is clicked
   };
 
   return (
@@ -124,12 +127,20 @@ const Task = () => {
         </div>
       </div>
 
-      {/* Display Calendar Modal */}
+      {/* Display Calendar Modal with Close Button */}
       {calendarVisible && (
-       <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-black text-white shadow-lg rounded-md p-4 z-50">
-       <Calendar mode="single" onDateChange={handleDateSelect} />
-     </div>
-     
+        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-black text-white shadow-lg rounded-md p-4 z-50">
+          <div className="flex justify-between mb-4">
+            <h3 className="text-lg">Select a Date</h3>
+            <button
+              onClick={handleCloseCalendar}
+              className="text-white text-sm "
+            >
+              X
+            </button>
+          </div>
+          <Calendar mode="single" onDateChange={handleDateSelect} />
+        </div>
       )}
 
       {/* Task List */}
