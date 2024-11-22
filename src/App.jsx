@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import Task from './components/Task'; // Ensure Task is imported correctly
 import Today from './components/Maintance';
 import Maintance from './components/Maintance';
+import Important from './components/Important';
 
 const appRouter = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const appRouter = createBrowserRouter([
       {
         path: '*', // Child route for today page
         element: <Maintance />,
+      },
+      {
+        path: '/importance', // Child route for today page
+        element: <Important />,
       },
     ],
   },
