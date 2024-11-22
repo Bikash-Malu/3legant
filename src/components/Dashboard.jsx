@@ -6,6 +6,7 @@ import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { motion } from "framer-motion";
 import LoadingBar from "react-top-loading-bar";
+
 import {
   AlignVerticalJustifyEnd,
   Bell,
@@ -206,17 +207,17 @@ export default function Dashboard() {
 
       {/* Right Sidebar */}
       <div
-        className={`fixed z-30 top-0 right-0 transform transition-transform duration-300 h-[100%] ${
+        className={`fixed mt-[5%] z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
           rightSidebarOpen ? "translate-x-0" : "translate-x-full"
         } w-64 border-l bg-white dark:bg-[#232323] p-4`}
       >
         <div className="mb-8 h-full ">
-          <span className="text-sm border-b-2 max-h-full  text-black font-semibold dark:text-white mx-auto mb-3">
+          <span className="text-sm border-b-2 max-h-full  text-black dark:text-white mx-auto mb-3">
             <div className="flex justify-between items-center mb-4">
               <div> </div>
           
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-4 cursor-pointer ">
               <li className="flex justify-between items-center border p-2   ">
                 <Checkbox checked />
                 <span>Buy groceries</span>
@@ -224,25 +225,25 @@ export default function Dashboard() {
                   <Star className="h-4 w-4" />
                 </Button>
               </li>
-              <li className="flex items-center gap-2 border-b-2 border-b-gray-700 p-1    ">
+              <li className="flex items-center gap-2 border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800    ">
                 <Plus className="h-4 w-4" />
-                <span>Add Step</span>
+                <span className="py-1">Add Step</span>
               </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2  ">
+              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2  ">
                 <Bell className="h-4 w-4" />
-                <span>Set Reminder</span>
+                <span className="py-1">Set Reminder</span>
               </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 p-1  space-x-2 ">
+              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
                 <Calendar className="h-4 w-4" />
-                <span>Add Due Date</span>
+                <span className="py-1">Add Due Date</span>
               </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2   ">
+              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2   ">
                 <Repeat className="h-4 w-4" />
-                <span>Repeat</span>
+                <span className="py-1">Repeat</span>
               </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 p-1 space-x-2    ">
+              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2    ">
                 <Notebook className="h-4 w-4"/>
-                <span>Add Notes</span>
+                <span className="py-1">Add Notes</span>
               </li>
             </ul>
 
@@ -302,12 +303,16 @@ export default function Dashboard() {
             </motion.div>
 
             <Button
-              onClick={() => setRightSidebarOpen(true)}
-              variant="ghost"
-              size="icon"
-            >
-              <Grid className="h-6 w-6 text-green-600 dark:text-white" />
-            </Button>
+      onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
+      variant="ghost"
+      size="icon"
+    >
+      {rightSidebarOpen ? (
+        <Menu className="h-6 w-6 text-green-600 dark:text-white" /> // Close icon
+      ) : (
+        <Grid className="h-6 w-6 text-green-600 dark:text-white" /> // Grid icon
+      )}
+    </Button>
             <ModeToggle />
           </div>
         </header>
