@@ -24,9 +24,12 @@ import {
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { list } from "postcss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAllTasks } from "./redux/tasksSlice";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 export default function Dashboard() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -70,6 +73,36 @@ export default function Dashboard() {
         return prevProgress + 10;
       });
     }, 100);
+  };
+  const dispatch = useDispatch();
+  const handleDeleteAllTasks = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This will delete all tasks permanently!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete all",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#d33", // Red color for the confirmation button
+      cancelButtonColor: "#3085d6", // Blue color for the cancel button
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAllTasks()); // Dispatch the deleteAllTasks action
+        toast.success("All tasks deleted successfully!");
+        Swal.fire("Deleted!", "All tasks have been removed.", "success");
+      }
+    });
+  };
+  const [query, setQuery] = useState(""); // Store the search query in state
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  const handleSearch = (event) => {
+    setQuery(event.target.value); // Update query when user types
+  };
+
+  const handleNavigate = () => {
+    // Navigate to the child component with query state
+    navigate("/task", { state: { query } }); 
   };
 
   return (
@@ -254,9 +287,13 @@ export default function Dashboard() {
               </Button>
               <div>Created Today</div>
 
-              <Button variant="ghost" size="icon">
-                <Trash2 className="h-4 w-4" />
-              </Button>
+              <Button
+      variant="ghost"
+      size="icon"
+      onClick={handleDeleteAllTasks} // Attach the action to the button's click event
+    >
+      <Trash2 className="h-4 w-4" />
+    </Button>
             </div>
           </span>
         </div>
@@ -285,8 +322,8 @@ export default function Dashboard() {
                 className={`${
                   isSearchOpen ? "w-full p-2" : "w-0"
                 } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
-                value={searchQuery}
-                onChange={handleSearchChange}
+                value={query}
+                onChange={handleSearch}
                 style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
               />
               <button

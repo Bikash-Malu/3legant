@@ -21,15 +21,18 @@ const tasksSlice = createSlice({
     },
     deleteTask: (state, action) => {
       state.list = state.list.filter((task) => task.id !== action.payload);
-    },    
+    },
     toggleTaskImportance: (state, action) => {
       const task = state.list.find((task) => task.id === action.payload);
       if (task) {
         task.important = !task.important; // Toggle the importance status
       }
     },
+    deleteAllTasks: (state) => {
+      state.list = []; // Clear the entire task list
+    },
   },
 });
 
-export const { setLoading, setTasks, toggleTaskCompletion, toggleTaskImportance ,deleteTask} = tasksSlice.actions;
+export const { setLoading, setTasks, toggleTaskCompletion, toggleTaskImportance, deleteTask, deleteAllTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;
