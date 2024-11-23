@@ -1,25 +1,46 @@
-// ImportantTasks.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
-import { Star } from "lucide-react";
+import { ArrowLeft, Star } from "lucide-react";
 import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Important = () => {
   const { list: tasks } = useSelector((state) => state.tasks);
 
-  const importantTasks = tasks.filter((task) => task.important); // Filter tasks by importance
+  const [loading, setLoading] = useState(true); // State to manage loading
+  const [importantTasks, setImportantTasks] = useState([]); // State to store important tasks
+
+  useEffect(() => {
+    // Simulate loading delay
+    setTimeout(() => {
+      setImportantTasks(tasks.filter((task) => task.important)); // Filter tasks by importance
+      setLoading(false); // Stop loading after tasks are filtered
+    }, 1000); // Adjust the timeout duration as needed
+  }, [tasks]);
 
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
-      <div className="mb-6">
-        <Link to="/" className="text-blue-500 hover:underline">
-          Back to All Tasks
-        </Link>
-      </div>
+<div className="mb-6 flex items-center gap-2">
+  <Link to="/" className="flex items-center text-blue-500 hover:underline">
+    <ArrowLeft className="h-5 w-5 text-blue-500" />
+    Back to All Tasks
+  </Link>
+</div>
 
-      {/* Display important tasks */}
-      {importantTasks.length === 0 ? (
+
+
+      {/* Display loading spinner or skeleton */}
+      {loading ? (
+        <div className="space-y-3">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <SkeletonTheme baseColor="#dbd9d9" highlightColor="#6b6969" key={index}>
+              <Skeleton height={50} className="rounded" />
+            </SkeletonTheme>
+          ))}
+        </div>
+      ) : importantTasks.length === 0 ? (
         <p className="text-center dark:text-white">No important tasks.</p>
       ) : (
         <div className="space-y-2">
@@ -37,11 +58,7 @@ const Important = () => {
                 />
                 <span className="dark:text-white">{task.text}</span>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => {}}
-              >
+              <Button variant="ghost" size="icon" onClick={() => {}}>
                 <Star
                   className="h-4 w-4 fill-current text-yellow-500 dark:text-yellow-400"
                 />
