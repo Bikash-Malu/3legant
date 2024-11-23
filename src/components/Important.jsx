@@ -2,34 +2,44 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
 import { ArrowLeft, Star } from "lucide-react";
-import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
+import { Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import NProgress from "nprogress"; // Import NProgress
+import "nprogress/nprogress.css"; // Import NProgress CSS
 
 const Important = () => {
   const { list: tasks } = useSelector((state) => state.tasks);
 
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [importantTasks, setImportantTasks] = useState([]); // State to store important tasks
+  const [loading, setLoading] = useState(true);
+  const [importantTasks, setImportantTasks] = useState([]);
 
   useEffect(() => {
+    // Start NProgress when loading begins
+    NProgress.start();
+
     // Simulate loading delay
-    setTimeout(() => {
-      setImportantTasks(tasks.filter((task) => task.important)); // Filter tasks by importance
-      setLoading(false); // Stop loading after tasks are filtered
-    }, 1000); // Adjust the timeout duration as needed
+    const timeout = setTimeout(() => {
+      setImportantTasks(tasks.filter((task) => task.important));
+      setLoading(false);
+      NProgress.done(); // Stop NProgress when loading ends
+    }, 1000); // Adjust timeout duration as needed
+
+    return () => {
+      NProgress.done(); // Ensure NProgress stops if the component unmounts early
+      clearTimeout(timeout); // Clear timeout
+    };
   }, [tasks]);
 
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
-<div className="mb-6 flex items-center gap-2">
-  <Link to="/" className="flex items-center text-blue-500 hover:underline">
-    <ArrowLeft className="h-5 w-5 text-blue-500" />
-    Back to All Tasks
-  </Link>
-</div>
-
-
+      {/* Back to All Tasks with Arrow */}
+      <div className="mb-6 flex items-center gap-2">
+        <Link to="/" className="flex items-center text-blue-500 hover:underline">
+          <ArrowLeft className="h-5 w-5 text-blue-500" />
+          Back to All Tasks
+        </Link>
+      </div>
 
       {/* Display loading spinner or skeleton */}
       {loading ? (
