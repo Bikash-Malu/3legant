@@ -19,6 +19,9 @@ const tasksSlice = createSlice({
         task.completed = !task.completed; // Toggle the completion status
       }
     },
+    deleteTask: (state, action) => {
+      state.list = state.list.filter((task) => task.id !== action.payload);
+    },    
     toggleTaskImportance: (state, action) => {
       const task = state.list.find((task) => task.id === action.payload);
       if (task) {
@@ -28,5 +31,5 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { setLoading, setTasks, toggleTaskCompletion, toggleTaskImportance } = tasksSlice.actions;
+export const { setLoading, setTasks, toggleTaskCompletion, toggleTaskImportance ,deleteTask} = tasksSlice.actions;
 export default tasksSlice.reducer;

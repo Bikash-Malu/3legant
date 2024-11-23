@@ -7,32 +7,43 @@ import Task from './components/Task'; // Ensure Task is imported correctly
 import Today from './components/Maintance';
 import Maintance from './components/Maintance';
 import Important from './components/Important';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
 
 const appRouter = createBrowserRouter([
   {
-    path: '/', // Parent route for the Dashboard
-    element: <Dashboard />, // Dashboard as the parent route
+    path: '/login', 
+    element: <Login />, 
+  },
+  {
+    path: '/signup', 
+    element: <Signup />, 
+  },
+
+  {
+    path: '/', 
+    element: <Dashboard />, 
     children: [
       {
-        path: '/', // Redirect to /task when visiting the root
+        path: '/',
         element: <Navigate to="task" />,
       },
       {
-        path: 'task', // Child route for tasks
+        path: 'task',
         element: <Task />,
       },
       {
-        path: '*', // Child route for today page
+        path: '*',
         element: <Maintance />,
       },
       {
-        path: '/importance', // Child route for today page
+        path: 'importance', 
         element: <Important />,
       },
     ],
   },
-
 ]);
+
 
 function App() {
   return (

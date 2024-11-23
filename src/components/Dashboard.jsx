@@ -3,7 +3,6 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
-import { Input } from "./ui/input";
 import { motion } from "framer-motion";
 import LoadingBar from "react-top-loading-bar";
 
@@ -16,10 +15,8 @@ import {
   Menu,
   Notebook,
   Plus,
-  RefreshCcw,
   Repeat,
   Search,
-  Settings,
   Star,
   Trash2,
   X,
@@ -28,25 +25,17 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { list } from "postcss";
+import { useSelector } from "react-redux";
 
 export default function Dashboard() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [tasks, setTasks] = useState([
-    { id: 1, text: "Buy groceries", completed: false, important: false },
-    { id: 2, text: "Finish project report", completed: false, important: true },
-    { id: 3, text: "Call the bank", completed: false, important: false },
-    {
-      id: 4,
-      text: "Schedule dentist appointment",
-      completed: false,
-      important: false,
-    },
-    { id: 5, text: "Plan weekend trip", completed: false, important: false },
-    { id: 6, text: "Read a book", completed: true, important: false },
-    { id: 7, text: "Clean the house", completed: true, important: false },
-    { id: 8, text: "Prepare presentation", completed: true, important: false },
-    { id: 9, text: "Update blog", completed: true, important: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const { list: tasks1 } = useSelector((state) => state.tasks);
+
+  useEffect(() => {
+    setTasks(tasks1);
+  }, [tasks1]); // Update `tasks` whenever `tasks1` changes
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
@@ -54,7 +43,6 @@ export default function Dashboard() {
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value); // Update search query
-
   };
 
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -92,7 +80,6 @@ export default function Dashboard() {
         onLoaderFinished={() => setProgress(0)}
         className="z-50"
       />
-      {/* Sidebar */}
       <div
         className={`absolute h-[100%] lg:relative z-20 transform transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -131,42 +118,52 @@ export default function Dashboard() {
             </div>
 
             <nav className="space-y-2 bg-white dark:bg-[#232323]">
-      <Button
-        variant="ghost"
-        className={`w-full justify-start gap-2 ${getActiveClass("/task")}`}
-      >
-        <LayoutGrid className="h-4 w-4" />
-        <Link to="/task">All Tasks</Link>
-      </Button>
-      <Button
-        variant="ghost"
-        className={`w-full justify-start gap-2 ${getActiveClass("/today")}`}
-      >
-        <Calendar className="h-4 w-4" />
-        <Link to="/today">Today</Link>
-      </Button>
-      <Button
-        variant="ghost"
-        className={`w-full justify-start gap-2 ${getActiveClass("/importance")}`}
-      >
-        <Star className="h-4 w-4" />
-        <Link to="/importance">Important</Link>
-      </Button>
-      <Button
-        variant="ghost"
-        className={`w-full justify-start gap-2 ${getActiveClass("/planned")}`}
-      >
-        <Grid className="h-4 w-4" />
-        <Link to="/planned">Planned</Link>
-      </Button>
-      <Button
-        variant="ghost"
-        className={`w-full justify-start gap-2 ${getActiveClass("/assign")}`}
-      >
-        <AlignVerticalJustifyEnd className="h-4 w-4" />
-        <Link to="/assign">Assigned to me</Link>
-      </Button>
-    </nav>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2 ${getActiveClass(
+                  "/task"
+                )}`}
+              >
+                <LayoutGrid className="h-4 w-4" />
+                <Link to="/task">All Tasks</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2 ${getActiveClass(
+                  "/today"
+                )}`}
+              >
+                <Calendar className="h-4 w-4" />
+                <Link to="/today">Today</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2 ${getActiveClass(
+                  "/importance"
+                )}`}
+              >
+                <Star className="h-4 w-4" />
+                <Link to="/importance">Important</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2 ${getActiveClass(
+                  "/planned"
+                )}`}
+              >
+                <Grid className="h-4 w-4" />
+                <Link to="/planned">Planned</Link>
+              </Button>
+              <Button
+                variant="ghost"
+                className={`w-full justify-start gap-2 ${getActiveClass(
+                  "/assign"
+                )}`}
+              >
+                <AlignVerticalJustifyEnd className="h-4 w-4" />
+                <Link to="/assign">Assigned to me</Link>
+              </Button>
+            </nav>
           </div>
 
           <Button
@@ -183,7 +180,7 @@ export default function Dashboard() {
             </div>
             <div className="flex justify-between">
               <div className="text-2xl font-bold mb-4 text-[#232323] dark:text-white">
-                11
+                {tasks.length}
               </div>
               <div className="bg-gray-300 dark:bg-green-500 h-5 w-5 text-center rounded-full text-white font-bold flex items-center justify-center">
                 !
@@ -191,7 +188,7 @@ export default function Dashboard() {
             </div>
             <div className="w-32 h-32 mx-auto">
               <CircularProgressbar
-                value={progress||progressPercentage}
+                value={progress || progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
                 strokeWidth={16}
                 styles={buildStyles({
@@ -209,13 +206,12 @@ export default function Dashboard() {
       <div
         className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
           rightSidebarOpen ? "translate-x-0" : "translate-x-full"
-        } w-64 border-l bg-white dark:bg-[#232323] p-4`}
+        } w-64 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
       >
         <div className="mb-8 h-full ">
           <span className="text-sm border-b-2 max-h-full  text-black dark:text-white mx-auto mb-3">
             <div className="flex justify-between items-center mb-4">
               <div> </div>
-          
             </div>
             <ul className="space-y-4 cursor-pointer ">
               <li className="flex justify-between items-center border p-2   ">
@@ -234,6 +230,7 @@ export default function Dashboard() {
                 <span className="py-1">Set Reminder</span>
               </li>
               <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
+                
                 <Calendar className="h-4 w-4" />
                 <span className="py-1">Add Due Date</span>
               </li>
@@ -242,13 +239,13 @@ export default function Dashboard() {
                 <span className="py-1">Repeat</span>
               </li>
               <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2    ">
-                <Notebook className="h-4 w-4"/>
+                <Notebook className="h-4 w-4" />
                 <span className="py-1">Add Notes</span>
               </li>
             </ul>
 
             <div className="flex justify-between w-[90%] items-center absolute bottom-0 mx-auto mb-5">
-            <Button
+              <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setRightSidebarOpen(false)}
@@ -256,7 +253,7 @@ export default function Dashboard() {
                 <X className="h-6 w-6" />
               </Button>
               <div>Created Today</div>
-             
+
               <Button variant="ghost" size="icon">
                 <Trash2 className="h-4 w-4" />
               </Button>
@@ -264,8 +261,6 @@ export default function Dashboard() {
           </span>
         </div>
       </div>
-
-      {/* Main Content */}
       <div className="flex-1 overflow-auto">
         <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
           <Button
@@ -278,7 +273,7 @@ export default function Dashboard() {
           </Button>
 
           <div className="flex items-center gap-2 justify-end w-full">
-          <motion.div
+            <motion.div
               initial={{ width: 40 }}
               animate={{ width: isSearchOpen ? 200 : 40 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -303,21 +298,20 @@ export default function Dashboard() {
             </motion.div>
 
             <Button
-      onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
-      variant="ghost"
-      size="icon"
-    >
-      {rightSidebarOpen ? (
-        <Menu className="h-6 w-6 text-green-600 dark:text-white" /> // Close icon
-      ) : (
-        <Grid className="h-6 w-6 text-green-600 dark:text-white" /> // Grid icon
-      )}
-    </Button>
+              onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
+              variant="ghost"
+              size="icon"
+            >
+              {rightSidebarOpen ? (
+                <Menu className="h-6 w-6 text-green-600 dark:text-white" />
+              ) : (
+                <Grid className="h-6 w-6 text-green-600 dark:text-white" />
+              )}
+            </Button>
             <ModeToggle />
           </div>
         </header>
         <main className="p-6">
-          
           <Outlet />
         </main>
       </div>
