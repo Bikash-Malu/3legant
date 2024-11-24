@@ -49,7 +49,7 @@ Follow these steps to set up the project on your local system:
 ---
 ## Project Image
 
-Below is a preview of the Dolty-Todo App:
+Below is a preview of the DoIt-Todo App:
 
 ![Dolty-Todo Screenshot](https://pic.surf/gme)
 
