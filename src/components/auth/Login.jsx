@@ -2,12 +2,14 @@ import { Button } from "../ui/button";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; 
 import { toast } from "sonner";
-import { useDispatch } from "react-redux"; // Import useDispatch from redux
-import { login } from "../redux/authSlice"; // Import login action from your slice
-import { TailSpin } from 'react-loader-spinner'; // Import the loader component
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
+import { TailSpin } from 'react-loader-spinner'; 
+import NProgress from "nprogress"; 
+import "nprogress/nprogress.css"; 
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,10 +17,10 @@ export default function Login() {
     username: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
   
-  const dispatch = useDispatch(); // Initialize dispatch
-  const navigate = useNavigate(); // Initialize navigate function
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -27,32 +29,56 @@ export default function Login() {
       [id]: value,
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (!formData.username || !formData.password) {
-      toast.error("Please fill in both username and password");
+    const usernameRegex = /^[a-zA-Z0-9 _-]{3,20}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/; // Valid password regex
+    if (!usernameRegex.test(formData.username)) {
+      toast.error("Username must be alphanumeric and 3-20 characters long.");
       return;
     }
-
-    setLoading(true); // Start loading
-
+    if (!passwordRegex.test(formData.password)) {
+      toast.error("Password must be at least 8 characters long and include one number and one special character.");
+      return;
+    }
+    setLoading(true);
+    NProgress.start();
+  
     const user = {
       username: formData.username,
-      email: formData.username
+      email: formData.email, 
     };
-
-    // Simulate the login action
     dispatch(login(user));
-
-    // Simulate a delay for login process
     setTimeout(() => {
       toast.success("Login successful!");
-      setLoading(false); // Stop loading after the "login" process is done
-      navigate("/"); // Navigate after 2 seconds
+      setLoading(false);
+      NProgress.done();
+      navigate("/"); 
     }, 2000);
   };
+  
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      #nprogress .bar {
+        background: black !important; /* Black color for the progress bar */
+      }
+      #nprogress .peg {
+        box-shadow: 0 0 10px black, 0 0 5px black !important; /* Shadow for the progress bar */
+      }
+      #nprogress .spinner-icon {
+        border-top-color: black !important;
+        border-left-color: black !important;
+      }
+      #nprogress .spinner {
+        border-color: black !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2 bg-white">
@@ -74,7 +100,7 @@ export default function Login() {
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="space-y-2">
                 <label htmlFor="username" className="text-gray-700">
-                  Your Username or Email Address
+                  Your Username
                 </label>
                 <input
                   id="username"

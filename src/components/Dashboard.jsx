@@ -119,6 +119,7 @@ export default function Dashboard() {
       }
     });
   };
+  const username = JSON.parse(localStorage.getItem("auth"))?.username;
 
 
   return (
@@ -162,7 +163,7 @@ export default function Dashboard() {
                 Hey,
               </div>
               <div className="font-medium dark:text-white text-black">
-                Bikash
+                {username}
               </div>
             </div>
 
