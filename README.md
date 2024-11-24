@@ -12,7 +12,6 @@ DoIt-Todo is a modern and responsive task management application built using **R
 
 - **Add Todos**: Create new tasks effortlessly.
 - **View Todos**: View all tasks in an organized list.
-- **Edit Todos**: Update tasks as needed.
 - **Delete Todos**: Remove tasks from the list.
 - **Responsive Design**: Fully responsive design built with Tailwind CSS.
 - **State Management**: Robust state management with Redux.
