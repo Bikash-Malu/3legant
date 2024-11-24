@@ -125,7 +125,11 @@ export default function Login() {
         <div className="flex flex-col justify-center flex-1 pb-12">
           <div className="mx-auto w-full max-w-[440px] space-y-6">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
+<p className="mt-2 text-sm text-gray-600">
+    Please sign in to your account to continue and access personalized features.
+</p>
+
             </div>
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
               <div className="space-y-2">
