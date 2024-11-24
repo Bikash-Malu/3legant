@@ -5,7 +5,6 @@ import { Card } from "./ui/card";
 import { Checkbox } from "./ui/checkbox";
 import { motion } from "framer-motion";
 import LoadingBar from "react-top-loading-bar";
-
 import {
   AlignVerticalJustifyEnd,
   Bell,
@@ -26,28 +25,24 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { ModeToggle } from "./ModeToggle";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { list } from "postcss";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAllTasks } from "./redux/tasksSlice";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 import { logout } from "./redux/authSlice";
-
 export default function Dashboard() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
   const { list: tasks1 } = useSelector((state) => state.tasks);
-
   useEffect(() => {
     setTasks(tasks1);
-  }, [tasks1]); // Update `tasks` whenever `tasks1` changes
+  }, [tasks1]); 
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
   const [progress, setProgress] = useState(0);
-
   const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value); // Update search query
+    setSearchQuery(event.target.value);
   };
 
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -288,7 +283,6 @@ export default function Dashboard() {
           </Card>
         </div>
       </div>
-
       {/* Right Sidebar */}
       <div
         className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
@@ -406,7 +400,6 @@ export default function Dashboard() {
             >
               <LogOut className="h-6 w-6 text-black dark:text-white" />
             </Button>
-
             <ModeToggle />
           </div>
         </header>

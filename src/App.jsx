@@ -7,9 +7,10 @@ import Important from "./components/Important";
 import Maintance from "./components/Maintance";
 import { ThemeProvider } from "./theme/theme-provider";
 import { Toaster } from "sonner";
-import { login, logout } from "../src/components/redux/authSlice";
-import './App.css'
+import { login } from "../src/components/redux/authSlice";
+import './App.css';
 import TaskList from "./components/TaskList";
+
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const isAuthInLocalStorage = JSON.parse(localStorage.getItem("auth"));
@@ -19,6 +20,7 @@ const ProtectedRoute = ({ children }) => {
 
   return children;
 };
+
 const appRouter = createBrowserRouter([
   {
     path: "/login",
@@ -65,10 +67,16 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Check and persist auth state
     const authData = localStorage.getItem("auth");
-
     if (authData) {
       dispatch(login(JSON.parse(authData)));
+    }
+
+    // Set the theme to dark in local storage
+    const storedTheme = localStorage.getItem("theme");
+    if (!storedTheme) {
+      localStorage.setItem("theme", "dark");
     }
   }, [dispatch]);
 
