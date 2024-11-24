@@ -16,7 +16,6 @@ export function ModeToggle() {
     document.documentElement.classList.remove(theme);
     document.documentElement.classList.add(newTheme);
   };
-
   return (
     <button onClick={toggleTheme} className="p-2 ">
       {theme === 'light' ? (
