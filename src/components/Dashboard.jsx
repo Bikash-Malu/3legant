@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Calendar as MyCalendar } from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 import { ModeToggle } from "./ModeToggle";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,11 +42,14 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
+  const [calendarVisible, setCalendarVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
+  const toggleCalendar = () => {
+    setCalendarVisible(!calendarVisible);
+  };
   const completedTasks = tasks.filter((task) => task.completed).length;
   const totalTasks = tasks.length;
   const progressPercentage = (completedTasks / totalTasks) * 100;
@@ -118,9 +123,7 @@ export default function Dashboard() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const toggleCalendar = () => {
-    setShowCalendar(!showCalendar);
-  };
+
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -310,10 +313,21 @@ export default function Dashboard() {
                 <Bell className="h-4 w-4" />
                 <span className="py-1">Set Reminder</span>
               </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
-                <Calendar className="h-4 w-4" />
+              <li onClick={toggleCalendar} className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
+                <Calendar className="h-4 w-4"  />
                 <span className="py-1">Add Due Date</span>
               </li>
+              {calendarVisible && (
+          <MyCalendar
+            onChange={(date) => {
+              setSelectedDate(date);
+              setCalendarVisible(false);
+              // toast.success(`Selected Date: ${date.toLocaleDateString()}`);
+            }}
+            value={selectedDate}
+            className="border dark:bg-[#2F3630] dark:text-white"
+          />
+        )}
               <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2   ">
                 <Repeat className="h-4 w-4" />
                 <span className="py-1">Repeat</span>

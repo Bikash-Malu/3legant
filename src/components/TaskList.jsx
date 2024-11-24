@@ -16,7 +16,7 @@ import {
   deleteTask,
 } from "./redux/tasksSlice";
 import { toast } from "sonner";
-import { Calendar } from "./ui/calendar";
+
 import { useLocation } from "react-router-dom";
 
 const TaskList = () => {
@@ -71,19 +71,7 @@ const TaskList = () => {
     }
   };
 
-  const toggleCalendar = () => {
-    setCalendarVisible(!calendarVisible);
-  };
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    setCalendarVisible(false);
-    toast.success(`Selected Date: ${date.toLocaleDateString()}`);
-  };
-
-  const handleCloseCalendar = () => {
-    setCalendarVisible(false);
-  };
   const handleDeleteTask = (taskId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -162,7 +150,7 @@ const TaskList = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={toggleCalendar}
+             
               className="dark:text-white"
             >
               <svg
@@ -192,20 +180,7 @@ const TaskList = () => {
           </Button>
         </div>
       </div>
-      {calendarVisible && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 bg-black text-white shadow-lg rounded-md p-4 z-50">
-          <div className="flex justify-between mb-4">
-            <h3 className="text-lg">Select a Date</h3>
-            <button
-              onClick={handleCloseCalendar}
-              className="text-white text-sm "
-            >
-              X
-            </button>
-          </div>
-          <Calendar mode="single" onDateChange={handleDateSelect} />
-        </div>
-      )}
+    
       {loading ? (
         <div className="space-y-3">
           {Array.from({ length: 10 }).map((_, index) => (
