@@ -55,3 +55,13 @@ html {
   border-color: #66bb6a;
   background-color: #388e3c;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+body {
+  overflow: auto;
+}
