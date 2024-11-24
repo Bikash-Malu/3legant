@@ -369,7 +369,7 @@ export default function Dashboard() {
           className="text-red-600 dark:text-white"
         >
           {/* Replace LogOut with an actual logout icon */}
-          <LogOut className="h-6 w-6 text-red-600 dark:text-white" />
+          <LogOut className="h-6 w-6 text-green-600 dark:text-white" />
         </Button>
 
         <ModeToggle />
