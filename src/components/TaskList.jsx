@@ -103,24 +103,27 @@ const TaskList = () => {
       }
     });
   };
-
+const showMessgae=(name)=>{
+  // toast.success(` you make ${name} as favourite`)
+}
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
-      <div className="mb-6">
-        <Input
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              addTask();
-            }
-          }}
-          className="bg-gradient-to-t from-[rgba(208,255,210,0.1)] to-[rgba(53,121,55,0.1)] mb-1 dark:bg-[#2F3630] outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
+      <div className="mb-6 bg-gradient-to-t from-[rgba(208,255,210,0.1)] to-[rgba(53,121,55,0.1)]">
+      <input
+  type="text"
+  autoFocus={false}
+  value={newTask}
+  onChange={(e) => setNewTask(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  }}
+  className="w-full px-1  dark:bg-[#2F3630] outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
+  placeholder="Add A Task"
+/>
 
-
-          placeholder="Add A Task"
-        />
-        <div className="flex items-center justify-between bg-green-50 dark:bg-[#2F3630] py-2">
+        <div className="flex items-center justify-between  dark:bg-[#2F3630] py-2">
           <div className="flex gap-2">
             <Button variant="ghost" size="icon">
               <Bell className="h-4 w-4 text-[#232323] dark:text-white" />
@@ -238,6 +241,7 @@ const TaskList = () => {
                         onClick={() => dispatch(toggleTaskImportance(task.id))}
                       >
                         <Star
+                        onClick={showMessgae(task.text)}
                           className={
                             task.important
                               ? "h-4 w-4 fill-current text-yellow-500 dark:text-yellow-400"
