@@ -129,7 +129,7 @@ export default function Dashboard() {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setShowCalendar(false); // Close calendar after date selection
+    setShowCalendar(false);
   };
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">

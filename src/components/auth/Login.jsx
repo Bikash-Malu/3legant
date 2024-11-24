@@ -126,9 +126,10 @@ export default function Login() {
           <div className="mx-auto w-full max-w-[440px] space-y-6">
             <div className="space-y-2">
             <h1 className="text-3xl font-bold text-gray-900">Sign in</h1>
-<p className="mt-2 text-sm text-gray-600">
-    Please sign in to your account to continue and access personalized features.
+            <p className="mt-2 text-sm text-gray-600 font-bold">
+            Sign in with any username and password to continue and access personalized features. This process ensures secure authentication for your account and guarantees access to a private URL.
 </p>
+
 
             </div>
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
