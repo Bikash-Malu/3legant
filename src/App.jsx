@@ -64,19 +64,6 @@ const appRouter = createBrowserRouter([
 ]);
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const authData = localStorage.getItem("auth");
-    if (authData) {
-      dispatch(login(JSON.parse(authData)));
-    }
-    const storedTheme = localStorage.getItem("theme");
-    if (!storedTheme) {
-      localStorage.setItem("theme", "dark");
-    }
-  }, [dispatch]);
-
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div>
