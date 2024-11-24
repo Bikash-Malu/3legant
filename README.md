@@ -12,7 +12,6 @@ Dolty-Todo is a modern and responsive task management application built using **
 - **Delete Todos**: Remove tasks from the list.
 - **Responsive Design**: Fully responsive design built with Tailwind CSS.
 - **State Management**: Robust state management with Redux.
-- **Asynchronous Data Handling**: SWR is used for efficient and fast data fetching.
 
 ---
 
@@ -21,7 +20,6 @@ Dolty-Todo is a modern and responsive task management application built using **
 - **React**: Frontend library for building the user interface.
 - **Redux**: State management for predictable state container.
 - **Tailwind CSS**: Utility-first CSS framework for styling.
-- **SWR**: React library for data fetching with caching and revalidation.
 - **shadcn UI**: Additional UI components for enhanced user experience.
 
 ---
