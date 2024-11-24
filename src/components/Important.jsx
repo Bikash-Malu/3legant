@@ -48,7 +48,11 @@ const Important = () => {
         <p className="text-center dark:text-white">No important tasks.</p>
       ) : (
         <div className="space-y-2">
+             <div className="mt-6 mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            Important Tasks
+          </div>
           {importantTasks.map((task) => (
+
             <div
               key={task.id}
               className="flex items-center justify-between border-b-2 bg-white dark:bg-[#232323] dark:border-gray-700 p-3 sm:p-2 sm:w-full sm:h-12 w-auto h-auto"

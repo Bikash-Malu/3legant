@@ -144,7 +144,7 @@ export default function Dashboard() {
           >
             <X className="h-6 w-6 text-green-600 dark:text-white" />
           </button>
-          <span className="text-2xl font-bold text-green-600 dark:text-white mx-auto mb-3">
+          <span className="text-2xl font-bold text-[#3F9142] dark:text-white mx-auto mb-3">
             DoIt
           </span>
         </div>
