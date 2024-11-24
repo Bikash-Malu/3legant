@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: 'class',  // Enable dark mode based on a class
-	content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],  // Specify content paths for Tailwind
+	darkMode: 'class',  
+	content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"], 
 	theme: {
 	  extend: {
 		borderRadius: {
@@ -10,8 +10,7 @@ module.exports = {
 		  sm: 'calc(var(--radius) - 4px)',
 		},
 		colors: {
-		  // Custom color variables for the theme
-		  background: 'hsl(var(--background, #ffffff))',  // Default white background
+		  background: 'hsl(var(--background, #ffffff))', 
 		  foreground: 'hsl(var(--foreground))',
 		  card: {
 			DEFAULT: 'hsl(var(--card))',
@@ -22,7 +21,7 @@ module.exports = {
 			foreground: 'hsl(var(--popover-foreground))',
 		  },
 		  primary: {
-			DEFAULT: 'hsl(var(--primary, #007bff))',  // Default primary color is now light blue
+			DEFAULT: 'hsl(var(--primary, #007bff))', 
 			foreground: 'hsl(var(--primary-foreground))',
 		  },
 		  secondary: {
@@ -54,6 +53,6 @@ module.exports = {
 		},
 	  },
 	},
-	plugins: [require("tailwindcss-animate")],  // Include animation plugin
+	plugins: [require("tailwindcss-animate")], 
   }
   

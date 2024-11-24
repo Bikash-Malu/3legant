@@ -1,4 +1,4 @@
-// authSlice.js (assuming you're using Redux toolkit)
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const authSlice = createSlice({

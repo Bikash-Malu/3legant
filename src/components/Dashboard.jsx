@@ -180,7 +180,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <nav className="space-y-2 bg-white dark:bg-[#232323]">
+            <nav className="space-y-2 bg-white dark:bg-[#232323] rounded-md">
               <Button
                 variant="ghost"
                 className={`w-full justify-start gap-2 ${getActiveClass(
@@ -231,7 +231,7 @@ export default function Dashboard() {
 
           <Button
             variant="ghost"
-            className="w-full justify-start gap-2 bg-white dark:bg-[#232323] py-14"
+            className="w-full justify-start gap-2 bg-white dark:bg-[#232323] py-10"
           >
             <Plus className="h-4 w-4 text-[#232323] dark:text-white" />
             Add list
