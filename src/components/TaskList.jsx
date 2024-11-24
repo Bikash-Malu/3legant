@@ -52,7 +52,6 @@ const TaskList = () => {
   );
   useEffect(() => {
     fetchTasks();
-    // filteredTasks(list)
   }, []);
 
   const addTask = () => {
@@ -109,11 +108,8 @@ const TaskList = () => {
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
       <div
-        className="mb-6 dark:bg-gradient-to-t from-[rgba(208,255,210,0.1)] to-[rgba(53,121,55,0.1)]"
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
-        }}
+        className="mb-6"
+    
       >
         <input
           type="text"
@@ -125,11 +121,18 @@ const TaskList = () => {
               addTask();
             }
           }}
-          className="w-full px-1  dark:bg-[#2F3630] outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
+          style={{
+            backgroundImage:
+              "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
+          }}
+          className="w-full px-4  dark:bg-[#2F3630] outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
           placeholder="Add A Task"
         />
 
-        <div className="flex items-center justify-between  dark:bg-[#2F3630] py-2">
+        <div className="flex items-center justify-between   py-2" style={{
+            backgroundImage:
+              "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
+          }}>
           <div className="flex gap-2">
             <Button variant="ghost" size="icon">
               <Bell className="h-4 w-4 text-[#232323] dark:text-white" />
@@ -183,7 +186,7 @@ const TaskList = () => {
           </div>
           <Button
             onClick={addTask}
-            className="bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900 dark:text-green-500 dark:hover:bg-green-700 mx-2"
+            className="bg-green-100 text-green-500 hover:bg-green-200 dark:bg-green-900 dark:text-white dark:hover:bg-green-700 mx-2"
           >
             ADD TASK
           </Button>
