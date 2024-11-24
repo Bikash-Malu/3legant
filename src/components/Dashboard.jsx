@@ -322,7 +322,7 @@ export default function Dashboard() {
             onChange={(date) => {
               setSelectedDate(date);
               setCalendarVisible(false);
-              // toast.success(`Selected Date: ${date.toLocaleDateString()}`);
+              toast.success(`Selected Date: ${date.toLocaleDateString()}`);
             }}
             value={selectedDate}
             className="border dark:bg-[#2F3630] dark:text-white"
@@ -331,7 +331,7 @@ export default function Dashboard() {
            <p className="mt-4 text-xs">
            {selectedDate && (
   <>
-    Selected Date: <span className="">{selectedDate.toDateString()}</span>
+    Selected Date: <span className="vv">{selectedDate.toDateString()}</span>
   </>
 )}
 
