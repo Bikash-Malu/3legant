@@ -1,51 +1,77 @@
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { Toaster } from 'sonner';
-import './App.css';
-import { ThemeProvider } from './theme/theme-provider'; // Ensure this path is correct
-import Dashboard from './components/Dashboard';
-import Task from './components/Task'; // Ensure Task is imported correctly
-import Today from './components/Maintance';
-import Maintance from './components/Maintance';
-import Important from './components/Important';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
+import React, { useEffect } from "react";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Login from "./components/auth/Login";
+import Dashboard from "./components/Dashboard";
+import Important from "./components/Important";
+import Maintance from "./components/Maintance";
+import { ThemeProvider } from "./theme/theme-provider";
+import { Toaster } from "sonner";
+import { login, logout } from "../src/components/redux/authSlice";
+import './App.css'
+import TaskList from "./components/TaskList";
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const isAuthInLocalStorage = JSON.parse(localStorage.getItem("auth"));
+  if (!isAuthenticated && !isAuthInLocalStorage) {
+    return <Navigate to="/login" />;
+  }
 
+  return children;
+};
 const appRouter = createBrowserRouter([
   {
-    path: '/login', 
-    element: <Login />, 
+    path: "/login",
+    element: (
+      <Login />
+    ),
+    loader: () => {
+      const authData = localStorage.getItem("auth");
+      if (authData) {
+        return <Navigate to="/" />;
+      }
+      return null;
+    },
   },
   {
-    path: '/signup', 
-    element: <Signup />, 
-  },
-
-  {
-    path: '/', 
-    element: <Dashboard />, 
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     children: [
       {
-        path: '/',
-        element: <Navigate to="task" />,
+        path: "/",
+        element: <Navigate to="task" replace />, 
       },
       {
-        path: 'task',
-        element: <Task />,
+        path: "task",
+        element: <TaskList />,
       },
       {
-        path: '*',
-        element: <Maintance />,
-      },
-      {
-        path: 'importance', 
+        path: "importance",
         element: <Important />,
+      },
+      {
+        path: "*",
+        element: <Maintance />,
       },
     ],
   },
 ]);
 
-
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const authData = localStorage.getItem("auth");
+
+    if (authData) {
+      dispatch(login(JSON.parse(authData)));
+    }
+  }, [dispatch]);
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div>

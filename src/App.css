@@ -2,13 +2,13 @@ html {
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 #nprogress .bar {
-    background: #4fa94d !important; /* Loader color */
-    height: 4px; /* Bar height */
+    background: #4fa94d !important;
+    height: 4px;
   }
 .task-checkbox {
-  appearance: none; /* Remove default browser style */
-  -webkit-appearance: none; /* Remove on Safari */
-  -moz-appearance: none; /* Remove on Firefox */
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none; 
   width: 20px;
   height: 20px;
   border: 2px solid #ddd;
@@ -16,35 +16,27 @@ html {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  transition: all 0.3s ease-in-out; /* Smooth transition for state change */
+  transition: all 0.3s ease-in-out; 
 }
-
-/* Style for checked state */
 .task-checkbox:checked {
-  background-color: #4caf50; /* Green background for checked state */
+  background-color: #4caf50; 
   border-color: #4caf50;
 }
-
-/* Create a custom checkmark using ::after */
 .task-checkbox:checked::after {
-  content: ''; /* Required to generate content */
+  content: ''; 
   position: absolute;
   top: 3px;
   left: 3px;
   width: 10px;
   height: 10px;
-  background-color: white; /* Checkmark color */
+  background-color: white;
   border-radius: 2px;
   transition: all 0.3s ease-in-out;
 }
-
-/* Add a darker color when hovering */
 .task-checkbox:hover {
   border-color: #4caf50;
   background-color: #80e27e;
 }
-
-/* Dark theme styles */
 .dark .task-checkbox {
   border-color: #444;
   background-color: #333;

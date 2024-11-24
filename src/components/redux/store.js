@@ -1,19 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage
+import storage from 'redux-persist/lib/storage';
 import tasksReducer from './tasksSlice';
+import authReducer from './authSlice';
 const persistConfig = {
-  key: 'root', 
+  key: 'root',
   storage,
+  whitelist: ['auth'],
+};
+const rootReducer = {
+  tasks: tasksReducer,
+  auth: persistReducer(persistConfig, authReducer),
 };
 
-const persistedReducer = persistReducer(persistConfig, tasksReducer);
-
 export const store = configureStore({
-  reducer: {
-    tasks: persistedReducer, // Use the persisted reducer
-  },
+  reducer: rootReducer,
 });
-
-// Persistor is used to persist the store
 export const persistor = persistStore(store);

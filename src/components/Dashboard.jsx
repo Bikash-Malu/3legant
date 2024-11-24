@@ -12,6 +12,7 @@ import {
   Calendar,
   Grid,
   LayoutGrid,
+  LogOut,
   Menu,
   Notebook,
   Plus,
@@ -30,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAllTasks } from "./redux/tasksSlice";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
+import { logout } from "./redux/authSlice";
 
 export default function Dashboard() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -83,27 +85,41 @@ export default function Dashboard() {
       showCancelButton: true,
       confirmButtonText: "Yes, delete all",
       cancelButtonText: "Cancel",
-      confirmButtonColor: "#d33", // Red color for the confirmation button
-      cancelButtonColor: "#3085d6", // Blue color for the cancel button
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteAllTasks()); // Dispatch the deleteAllTasks action
+        dispatch(deleteAllTasks());
         toast.success("All tasks deleted successfully!");
         Swal.fire("Deleted!", "All tasks have been removed.", "success");
       }
     });
   };
-  const [query, setQuery] = useState(""); // Store the search query in state
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = (event) => {
-    setQuery(event.target.value); // Update query when user types
+    const value = event.target.value;
+    setQuery(value);
+    navigate("/task", { state: { query: value } });
+  };
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, log me out",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(logout());
+        toast.success('logout successfully')
+      }
+    });
   };
 
-  const handleNavigate = () => {
-    // Navigate to the child component with query state
-    navigate("/task", { state: { query } }); 
-  };
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">
@@ -263,7 +279,6 @@ export default function Dashboard() {
                 <span className="py-1">Set Reminder</span>
               </li>
               <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
-                
                 <Calendar className="h-4 w-4" />
                 <span className="py-1">Add Due Date</span>
               </li>
@@ -288,66 +303,78 @@ export default function Dashboard() {
               <div>Created Today</div>
 
               <Button
-      variant="ghost"
-      size="icon"
-      onClick={handleDeleteAllTasks} // Attach the action to the button's click event
-    >
-      <Trash2 className="h-4 w-4" />
-    </Button>
+                variant="ghost"
+                size="icon"
+                onClick={handleDeleteAllTasks}
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
             </div>
           </span>
         </div>
       </div>
       <div className="flex-1 overflow-auto">
-        <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+      <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        <Menu className="h-14 w-14 text-green-600 dark:text-white" />
+      </Button>
+
+      <div className="flex items-center gap-2 justify-end w-full">
+        <motion.div
+          initial={{ width: 40 }}
+          animate={{ width: isSearchOpen ? 200 : 40 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
+        >
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            className={`${
+              isSearchOpen ? "w-full p-2" : "w-0"
+            } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
+            value={query}
+            onChange={handleSearch}
+            style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
+          />
+          <button
+            onClick={() => setIsSearchOpen((prev) => !prev)}
+            className="p-2"
           >
-            <Menu className="h-14 w-14 text-green-600 dark:text-white" />
-          </Button>
+            <Search className="h-5 w-5 text-green-600 dark:text-white" />
+          </button>
+        </motion.div>
 
-          <div className="flex items-center gap-2 justify-end w-full">
-            <motion.div
-              initial={{ width: 40 }}
-              animate={{ width: isSearchOpen ? 200 : 40 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
-            >
-              <input
-                type="text"
-                placeholder="Search tasks..."
-                className={`${
-                  isSearchOpen ? "w-full p-2" : "w-0"
-                } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
-                value={query}
-                onChange={handleSearch}
-                style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
-              />
-              <button
-                onClick={() => setIsSearchOpen((prev) => !prev)}
-                className="p-2"
-              >
-                <Search className="h-5 w-5 text-green-600 dark:text-white" />
-              </button>
-            </motion.div>
+        <Button
+          onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
+          variant="ghost"
+          size="icon"
+        >
+          {rightSidebarOpen ? (
+            <Menu className="h-6 w-6 text-green-600 dark:text-white" />
+          ) : (
+            <Grid className="h-6 w-6 text-green-600 dark:text-white" />
+          )}
+        </Button>
 
-            <Button
-              onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
-              variant="ghost"
-              size="icon"
-            >
-              {rightSidebarOpen ? (
-                <Menu className="h-6 w-6 text-green-600 dark:text-white" />
-              ) : (
-                <Grid className="h-6 w-6 text-green-600 dark:text-white" />
-              )}
-            </Button>
-            <ModeToggle />
-          </div>
-        </header>
+        {/* Logout Button with Icon */}
+        <Button
+          onClick={handleLogout}
+          variant="ghost"
+          size="icon"
+          className="text-red-600 dark:text-white"
+        >
+          {/* Replace LogOut with an actual logout icon */}
+          <LogOut className="h-6 w-6 text-red-600 dark:text-white" />
+        </Button>
+
+        <ModeToggle />
+      </div>
+    </header>
         <main className="p-6">
           <Outlet />
         </main>

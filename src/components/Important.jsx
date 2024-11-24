@@ -5,8 +5,8 @@ import { ArrowLeft, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import NProgress from "nprogress"; // Import NProgress
-import "nprogress/nprogress.css"; // Import NProgress CSS
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 const Important = () => {
   const { list: tasks } = useSelector((state) => state.tasks);
@@ -15,33 +15,27 @@ const Important = () => {
   const [importantTasks, setImportantTasks] = useState([]);
 
   useEffect(() => {
-    // Start NProgress when loading begins
     NProgress.start();
-
-    // Simulate loading delay
     const timeout = setTimeout(() => {
       setImportantTasks(tasks.filter((task) => task.important));
       setLoading(false);
-      NProgress.done(); // Stop NProgress when loading ends
-    }, 1000); // Adjust timeout duration as needed
+      NProgress.done(); 
+    }, 1000);
 
     return () => {
-      NProgress.done(); // Ensure NProgress stops if the component unmounts early
-      clearTimeout(timeout); // Clear timeout
+      NProgress.done();
+      clearTimeout(timeout); 
     };
   }, [tasks]);
 
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
-      {/* Back to All Tasks with Arrow */}
       <div className="mb-6 flex items-center gap-2">
         <Link to="/" className="flex items-center text-blue-500 hover:underline">
           <ArrowLeft className="h-5 w-5 text-blue-500" />
           Back to All Tasks
         </Link>
       </div>
-
-      {/* Display loading spinner or skeleton */}
       {loading ? (
         <div className="space-y-3">
           {Array.from({ length: 5 }).map((_, index) => (

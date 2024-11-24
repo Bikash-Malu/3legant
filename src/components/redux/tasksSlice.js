@@ -16,7 +16,7 @@ const tasksSlice = createSlice({
     toggleTaskCompletion: (state, action) => {
       const task = state.list.find((task) => task.id === action.payload);
       if (task) {
-        task.completed = !task.completed; // Toggle the completion status
+        task.completed = !task.completed;
       }
     },
     deleteTask: (state, action) => {
@@ -25,11 +25,11 @@ const tasksSlice = createSlice({
     toggleTaskImportance: (state, action) => {
       const task = state.list.find((task) => task.id === action.payload);
       if (task) {
-        task.important = !task.important; // Toggle the importance status
+        task.important = !task.important;
       }
     },
     deleteAllTasks: (state) => {
-      state.list = []; // Clear the entire task list
+      state.list = []; 
     },
   },
 });
