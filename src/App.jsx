@@ -67,13 +67,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Check and persist auth state
     const authData = localStorage.getItem("auth");
     if (authData) {
       dispatch(login(JSON.parse(authData)));
     }
-
-    // Set the theme to dark in local storage
     const storedTheme = localStorage.getItem("theme");
     if (!storedTheme) {
       localStorage.setItem("theme", "dark");
