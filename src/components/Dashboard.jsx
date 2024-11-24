@@ -331,7 +331,7 @@ export default function Dashboard() {
            <p className="mt-4 text-xs">
            {selectedDate && (
   <>
-    Selected Date: <span className="font-bold">{selectedDate.toDateString()}</span>
+    Selected Date: <span className="">{selectedDate.toDateString()}</span>
   </>
 )}
 
