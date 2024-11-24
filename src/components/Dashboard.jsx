@@ -254,7 +254,7 @@ export default function Dashboard() {
     <span class="dark:text-white text-black text-xs ">Pending</span>
   </div>
   <div class="flex items-center space-x-2">
-    <div class="w-2 h-2  bg-green-950   rounded-full"></div>
+    <div class="w-2 h-2  bg-green-900   rounded-full"></div>
     <span class="dark:text-white text-black text-xs">Done</span>
   </div>
 </div>
