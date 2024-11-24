@@ -1,71 +1,100 @@
 import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/authSlice";
-import { TailSpin } from 'react-loader-spinner'; 
-import NProgress from "nprogress"; 
-import "nprogress/nprogress.css"; 
+import { TailSpin } from "react-loader-spinner";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    rememberMe: false, 
   });
   const [loading, setLoading] = useState(false);
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    const savedCredentials = JSON.parse(localStorage.getItem("credentials"));
+    if (savedCredentials) {
+      setFormData({
+        ...formData,
+        username: savedCredentials.username,
+        password: savedCredentials.password,
+        rememberMe: true,
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [id]: value,
+      [id]: type === "checkbox" ? checked : value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const usernameRegex = /^[a-zA-Z0-9 _-]{3,20}$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/; // Valid password regex
+
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+
     if (!usernameRegex.test(formData.username)) {
       toast.error("Username must be alphanumeric and 3-20 characters long.");
       return;
     }
+
     if (!passwordRegex.test(formData.password)) {
       toast.error("Password must be at least 8 characters long and include one number and one special character.");
       return;
     }
+
     setLoading(true);
     NProgress.configure({ showSpinner: false });
     NProgress.start();
-  
+
     const user = {
       username: formData.username,
-      email: formData.email, 
+      email: formData.email,
     };
+    if (formData.rememberMe) {
+      localStorage.setItem(
+        "credentials",
+        JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        })
+      );
+    } else {
+      localStorage.removeItem("credentials");
+    }
+
     dispatch(login(user));
+
     setTimeout(() => {
       toast.success("Login successful!");
       setLoading(false);
       NProgress.done();
-      navigate("/"); 
+      navigate("/");
     }, 2000);
   };
-  
+
   useEffect(() => {
     const style = document.createElement("style");
     style.innerHTML = `
       #nprogress .bar {
-        background: black !important; /* Black color for the progress bar */
+        background: black !important;
       }
       #nprogress .peg {
-        box-shadow: 0 0 10px black, 0 0 5px black !important; /* Shadow for the progress bar */
+        box-shadow: 0 0 10px black, 0 0 5px black !important;
       }
       #nprogress .spinner-icon {
         border-top-color: black !important;
@@ -146,9 +175,14 @@ export default function Login() {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <input type="checkbox" id="terms" required />
+                  <input
+                    type="checkbox"
+                    id="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                  />
                   <Label
-                    htmlFor="terms"
+                    htmlFor="rememberMe"
                     className="text-sm ml-2 font-normal text-gray-700"
                   >
                     Remember me
@@ -163,8 +197,10 @@ export default function Login() {
               </div>
               <Button
                 type="submit"
-                className={`w-full bg-black text-white hover:bg-gray-950 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-                disabled={loading} // Disable button while loading
+                className={`w-full bg-black text-white hover:bg-gray-950 ${
+                  loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={loading}
               >
                 {loading ? (
                   <TailSpin
