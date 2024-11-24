@@ -44,13 +44,13 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const usernameRegex = /^[a-zA-Z0-9]+$/;
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
-    // if (!usernameRegex.test(formData.username)) {
-    //   toast.error("Username must be alphanumeric and 3-20 characters long.");
-    //   return;
-    // }
+    if (!formData.username) {
+      toast.error("Please fill in the username.");
+      return;
+    }
+    
 
     if (!passwordRegex.test(formData.password)) {
       toast.error("Password must be at least 8 characters long and include one number and one special character.");
