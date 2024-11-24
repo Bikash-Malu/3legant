@@ -48,7 +48,7 @@ const Maintance = () => {
             to="/"
             className="dark:bg-green-600 text-white py-2 px-4 rounded-lg dark:hover:bg-green-500 bg-black hover:bg-gray-900 transition duration-300"
           >
-            Go Back Home
+            Go Back To Tasks
           </Link>
         </>
       )}
