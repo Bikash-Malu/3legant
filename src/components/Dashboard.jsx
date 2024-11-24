@@ -120,7 +120,17 @@ export default function Dashboard() {
     });
   };
   const username = JSON.parse(localStorage.getItem("auth"))?.username;
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
+  const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setShowCalendar(false); // Close calendar after date selection
+  };
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">
       <LoadingBar
@@ -265,7 +275,7 @@ export default function Dashboard() {
       <div
         className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
           rightSidebarOpen ? "translate-x-0" : "translate-x-full"
-        } w-64 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
+        } w-72 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
       >
         <div className="mb-8 h-full ">
           <span className="text-sm border-b-2 max-h-full  text-black dark:text-white mx-auto mb-3">
@@ -308,7 +318,7 @@ export default function Dashboard() {
                 size="icon"
                 onClick={() => setRightSidebarOpen(false)}
               >
-                <X className="h-6 w-6" />
+                <X className="h-10 w-10" />
               </Button>
               <div>Created Today</div>
 
@@ -331,7 +341,7 @@ export default function Dashboard() {
             className="lg:hidden"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
-            <Menu className="h-14 w-14 text-2xl text-green-600 dark:text-white" />
+            <Menu className="h-14 w-14 text-2xl text-black dark:text-white" />
           </Button>
 
           <div className="flex items-center gap-2 justify-end w-full">
@@ -355,7 +365,7 @@ export default function Dashboard() {
                 onClick={() => setIsSearchOpen((prev) => !prev)}
                 className="p-2"
               >
-                <Search className="h-5 w-5 text-green-600 dark:text-white" />
+                <Search className="h-5 w-5 text-black dark:text-white" />
               </button>
             </motion.div>
 
@@ -365,9 +375,9 @@ export default function Dashboard() {
               size="icon"
             >
               {rightSidebarOpen ? (
-                <Menu className="h-6 w-6 text-green-600 dark:text-white" />
+                <Menu className="h-6 w-6 text-black dark:text-white" />
               ) : (
-                <Grid className="h-6 w-6 text-green-600 dark:text-white" />
+                <Grid className="h-6 w-6 text-black dark:text-white" />
               )}
             </Button>
 
@@ -379,7 +389,7 @@ export default function Dashboard() {
               className="text-red-600 dark:text-white"
             >
               {/* Replace LogOut with an actual logout icon */}
-              <LogOut className="h-6 w-6 text-green-600 dark:text-white" />
+              <LogOut className="h-6 w-6 text-black dark:text-white" />
             </Button>
 
             <ModeToggle />
