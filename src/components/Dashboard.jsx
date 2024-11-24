@@ -115,12 +115,11 @@ export default function Dashboard() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(logout());
-        toast.success('logout successfully')
+        toast.success("logout successfully");
       }
     });
   };
   const username = JSON.parse(localStorage.getItem("auth"))?.username;
-
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">
@@ -240,7 +239,7 @@ export default function Dashboard() {
               <CircularProgressbar
                 value={progress || progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
-                strokeWidth={16}
+                strokeWidth={18}
                 styles={buildStyles({
                   textColor: "#10B981",
                   pathColor: "#142E15",
@@ -249,16 +248,15 @@ export default function Dashboard() {
               />
             </div>
             <div class="flex items-center space-x-4 mt-2">
-  <div class="flex items-center space-x-2">
-    <div class="w-2 h-2 bg-[#3F9142] rounded-full"></div>
-    <span class="dark:text-white text-black text-xs ">Pending</span>
-  </div>
-  <div class="flex items-center space-x-2">
-    <div class="w-2 h-2  bg-green-900   rounded-full"></div>
-    <span class="dark:text-white text-black text-xs">Done</span>
-  </div>
-</div>
-
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-[#3F9142] rounded-full"></div>
+                <span class="dark:text-white text-black text-xs ">Pending</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2  bg-green-900   rounded-full"></div>
+                <span class="dark:text-white text-black text-xs">Done</span>
+              </div>
+            </div>
           </Card>
         </div>
       </div>
@@ -326,67 +324,67 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="flex-1 overflow-auto">
-      <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="lg:hidden"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      >
-        <Menu className="h-14 w-14 text-2xl text-green-600 dark:text-white" />
-      </Button>
-
-      <div className="flex items-center gap-2 justify-end w-full">
-        <motion.div
-          initial={{ width: 40 }}
-          animate={{ width: isSearchOpen ? 200 : 40 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
-        >
-          <input
-            type="text"
-            placeholder="Search tasks..."
-            className={`${
-              isSearchOpen ? "w-full p-2" : "w-0"
-            } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
-            value={query}
-            onChange={handleSearch}
-            style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
-          />
-          <button
-            onClick={() => setIsSearchOpen((prev) => !prev)}
-            className="p-2"
+        <header className="sticky flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
           >
-            <Search className="h-5 w-5 text-green-600 dark:text-white" />
-          </button>
-        </motion.div>
+            <Menu className="h-14 w-14 text-2xl text-green-600 dark:text-white" />
+          </Button>
 
-        <Button
-          onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
-          variant="ghost"
-          size="icon"
-        >
-          {rightSidebarOpen ? (
-            <Menu className="h-6 w-6 text-green-600 dark:text-white" />
-          ) : (
-            <Grid className="h-6 w-6 text-green-600 dark:text-white" />
-          )}
-        </Button>
+          <div className="flex items-center gap-2 justify-end w-full">
+            <motion.div
+              initial={{ width: 40 }}
+              animate={{ width: isSearchOpen ? 200 : 40 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
+            >
+              <input
+                type="text"
+                placeholder="Search tasks..."
+                className={`${
+                  isSearchOpen ? "w-full p-2" : "w-0"
+                } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
+                value={query}
+                onChange={handleSearch}
+                style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
+              />
+              <button
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+                className="p-2"
+              >
+                <Search className="h-5 w-5 text-green-600 dark:text-white" />
+              </button>
+            </motion.div>
 
-        {/* Logout Button with Icon */}
-        <Button
-          onClick={handleLogout}
-          variant="ghost"
-          size="icon"
-          className="text-red-600 dark:text-white"
-        >
-          {/* Replace LogOut with an actual logout icon */}
-          <LogOut className="h-6 w-6 text-green-600 dark:text-white" />
-        </Button>
+            <Button
+              onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
+              variant="ghost"
+              size="icon"
+            >
+              {rightSidebarOpen ? (
+                <Menu className="h-6 w-6 text-green-600 dark:text-white" />
+              ) : (
+                <Grid className="h-6 w-6 text-green-600 dark:text-white" />
+              )}
+            </Button>
 
-        <ModeToggle />
-      </div>
-    </header>
+            {/* Logout Button with Icon */}
+            <Button
+              onClick={handleLogout}
+              variant="ghost"
+              size="icon"
+              className="text-red-600 dark:text-white"
+            >
+              {/* Replace LogOut with an actual logout icon */}
+              <LogOut className="h-6 w-6 text-green-600 dark:text-white" />
+            </Button>
+
+            <ModeToggle />
+          </div>
+        </header>
         <main className="p-6">
           <Outlet />
         </main>
