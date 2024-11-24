@@ -145,7 +145,7 @@ export default function Dashboard() {
             <X className="h-6 w-6 text-green-600 dark:text-white" />
           </button>
           <span className="text-2xl font-bold text-[#3F9142] dark:text-white mx-auto mb-3">
-            DoIt
+            <img src="logo.png" alt="" />
           </span>
         </div>
         <div className="bg-[#EEF6EF] dark:bg-[#2C2C2C] rounded-xl p-2">
@@ -248,6 +248,17 @@ export default function Dashboard() {
                 })}
               />
             </div>
+            <div class="flex items-center space-x-4 mt-2">
+  <div class="flex items-center space-x-2">
+    <div class="w-2 h-2 bg-[#10B981] rounded-full"></div>
+    <span class="text-white text-xs">Pending</span>
+  </div>
+  <div class="flex items-center space-x-2">
+    <div class="w-2 h-2 bg-[#3F9142] rounded-full"></div>
+    <span class="text-white text-xs">Done</span>
+  </div>
+</div>
+
           </Card>
         </div>
       </div>
@@ -322,7 +333,7 @@ export default function Dashboard() {
         className="lg:hidden"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
-        <Menu className="h-14 w-14 text-green-600 dark:text-white" />
+        <Menu className="h-14 w-14 text-2xl text-green-600 dark:text-white" />
       </Button>
 
       <div className="flex items-center gap-2 justify-end w-full">
