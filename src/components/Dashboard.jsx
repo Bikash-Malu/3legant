@@ -232,7 +232,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold mb-4 text-[#232323] dark:text-white">
                 {tasks.length}
               </div>
-              <div className="bg-gray-300 dark:bg-green-500 h-5 w-5 text-center rounded-full text-white font-bold flex items-center justify-center">
+              <div className="bg-gray-300 dark:bg-green-500 h-4 w-4 text-xs text-center rounded-full text-white font-bold flex items-center justify-center">
                 !
               </div>
             </div>
