@@ -1,6 +1,10 @@
-# Dolty-Todo App
+# DoIt-Todo App
 
-Dolty-Todo is a modern and responsive task management application built using **React**, **Redux**, **Tailwind CSS** and **Axios** for efficient data fetching. This application allows users to **add, view, update, and delete tasks** seamlessly with a clean and intuitive user interface.
+![Dolty-Todo Logo](public/logo.png)
+
+DoIt-Todo is a modern and responsive task management application built using **React**, **Redux**, **Tailwind CSS**, and **Axios** for efficient data fetching. This application allows users to **add, view, update, and delete tasks** seamlessly with a clean and intuitive user interface.
+
+
 
 ---
 
