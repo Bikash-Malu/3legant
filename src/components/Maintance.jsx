@@ -37,7 +37,7 @@ const Maintance = () => {
         </div>
       ) : (
         <>
-          <h1 className="text-xl sm:text-lg font-bold text-gray-800 dark:text-white mb-4 text-center">
+          <h1 className="text-sm lg:text-3xl font-bold text-gray-800 dark:text-white mb-4 text-center">
             🚧 Under Maintenance 🚧
           </h1>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 text-center mb-6">
