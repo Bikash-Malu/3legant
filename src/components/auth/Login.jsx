@@ -87,9 +87,9 @@ export default function Login() {
         <img
           alt="Modern armchair with throw blanket"
           src="image.png"
-          width={600}
-          height={600}
-          className="h-auto w-auto max-h-[80%] max-w-[80%] object-cover"
+          width={500}
+          height={500}
+          className="h-auto w-auto max-h-[60%] max-w-[60%] object-cover"
         />
       </div>
       <div className="flex flex-col px-6 lg:px-12">
