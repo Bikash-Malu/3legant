@@ -42,6 +42,7 @@ export default function Login() {
       return;
     }
     setLoading(true);
+    NProgress.configure({ showSpinner: false });
     NProgress.start();
   
     const user = {
