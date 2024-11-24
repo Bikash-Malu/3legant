@@ -34,7 +34,9 @@ Follow these steps to set up the project on your local system:
 1. Clone the repository:
    ```bash
    git clone https://github.com/Bikash-Malu/3legant.git
-   cd 3legant
+2. Go to directory
+   ```bash
+    cd 3legant
 2. Install dependencies:
    ```bash
    npm install
