@@ -21,29 +21,39 @@ import { useLocation } from "react-router-dom";
 
 const TaskList = () => {
   const dispatch = useDispatch();
-  const { list: tasks} = useSelector((state) => state.tasks);
+  const { list: tasks } = useSelector((state) => state.tasks);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); 
-    }, 1500);
+      setLoading(false);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
   const [newTask, setNewTask] = useState("");
   const location = useLocation();
   const query = location.state?.query || "";
+
   const filteredTasks = tasks.filter((task) =>
     task.text.toLowerCase().includes(query.toLowerCase())
   );
+  const generateTaskId = () => {
+    if (tasks.length === 0) {
+      return 1;
+    }
+    const maxId = Math.max(...tasks.map((task) => task.id));
+    return maxId + 1;
+  };
+
   const addTask = () => {
     if (newTask.trim()) {
       const newTaskObject = {
-        id: tasks.length + 1,
+        id: generateTaskId(),
         text: newTask.trim(),
         completed: false,
         important: false,
-        date: selectedDate || new Date().toISOString(),
+        date: new Date().toISOString(),
       };
       dispatch(setTasks([...tasks, newTaskObject]));
       setNewTask("");
@@ -52,8 +62,6 @@ const TaskList = () => {
       toast.error("Task cannot be empty!");
     }
   };
-
-
   const handleDeleteTask = (taskId) => {
     Swal.fire({
       title: "Are you sure?",
