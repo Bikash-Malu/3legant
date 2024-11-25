@@ -31,8 +31,8 @@ const Important = () => {
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
       <div className="mb-6 flex items-center gap-2">
-        <Link to="/" className="flex items-center text-blue-500 hover:underline">
-          <ArrowLeft className="h-5 w-5 text-blue-500" />
+        <Link to="/" className="flex items-center dark:text-white text-black hover:underline">
+          <ArrowLeft className="h-5 w-5 dark:text-white text-black" />
           Back to All Tasks
         </Link>
       </div>
