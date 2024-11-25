@@ -22,7 +22,6 @@ const Important = () => {
       setLoading(false);
       NProgress.done(); 
     }, 1000);
-
     return () => {
       NProgress.done();
       clearTimeout(timeout); 
