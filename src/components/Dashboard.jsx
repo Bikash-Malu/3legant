@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
@@ -341,7 +342,7 @@ export default function Dashboard() {
         </li>
       </ul>
 
-      <div className="flex justify-between w-full items-center absolute bottom-0 mx-auto mb-5 px-2">
+      <div className="flex justify-between w-full items-center absolute bottom-0  mb-5 pr-10">
         <Button
           variant="ghost"
           size="icon"
