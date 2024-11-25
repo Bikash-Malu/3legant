@@ -114,6 +114,7 @@ export default function Dashboard() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
+        navigate('/login')
         dispatch(logout());
         toast.success("logout successfully");
       }
@@ -122,9 +123,6 @@ export default function Dashboard() {
   const username = JSON.parse(localStorage.getItem("auth"))?.username;
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
-
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setShowCalendar(false);

@@ -25,35 +25,12 @@ const TaskList = () => {
   const [newTask, setNewTask] = useState("");
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const fetchTasks = async () => {
-    dispatch(setLoading(true));
-    try {
-      setTimeout(async () => {
-        try {
-          const response = await axios.get(
-            "https://mocki.io/v1/ba43e6bf-766f-41da-9112-344ca76d2db2"
-          );
-          dispatch(setTasks(response.data));
-        } catch (error) {
-          console.error("Error fetching tasks:", error);
-          toast.error("Failed to fetch tasks");
-        } finally {
-          dispatch(setLoading(false));
-        }
-      }, 1000);
-    } catch (error) {
-      dispatch(setLoading(false));
-    }
-  };
+
   const location = useLocation();
   const query = location.state?.query || "";
   const filteredTasks = tasks.filter((task) =>
     task.text.toLowerCase().includes(query.toLowerCase())
   );
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
   const addTask = () => {
     if (newTask.trim()) {
       const newTaskObject = {

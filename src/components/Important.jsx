@@ -16,6 +16,7 @@ const Important = () => {
 
   useEffect(() => {
     NProgress.start();
+    NProgress.configure({ showSpinner: false });
     const timeout = setTimeout(() => {
       setImportantTasks(tasks.filter((task) => task.important));
       setLoading(false);

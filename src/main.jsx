@@ -7,8 +7,10 @@ import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <App />
-    </PersistGate>
-  </Provider>
+  {/* PersistGate delays rendering until rehydration is complete */}
+  <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+    <App />
+  </PersistGate>
+</Provider>,
+document.getElementById("root")
 );
