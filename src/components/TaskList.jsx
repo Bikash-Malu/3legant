@@ -24,11 +24,15 @@ const TaskList = () => {
   const { list: tasks } = useSelector((state) => state.tasks);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchTasks = () => {
+    setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
     return () => clearTimeout(timer);
+  };
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   const [newTask, setNewTask] = useState("");
