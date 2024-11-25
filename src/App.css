@@ -65,3 +65,44 @@ html {
 body {
   overflow: auto;
 }
+
+.react-calendar {
+  border: 1px solid #d1d5db;
+  background-color: #ffffff; 
+  color: #000000; 
+}
+
+.react-calendar__tile {
+  color: #000000;
+}
+
+.react-calendar__tile--active {
+  background-color: #4CAF50; 
+  color: white; 
+}
+
+.react-calendar__tile--now {
+  border: 1px solid #000000; 
+  background-color: #ffffff; 
+  color: #000000; 
+}
+.dark .react-calendar {
+  border: 1px solid #4b5563;
+  background-color: #232323; 
+  color: #ffffff; 
+}
+
+.dark .react-calendar__tile {
+  color: #ffffff;
+}
+
+.dark .react-calendar__tile--active {
+  background-color: #1db954;
+  color: white;
+}
+
+.dark .react-calendar__tile--now {
+  border: 1px solid #ffffff;
+  background-color: #232323;
+  color: #ffffff;
+}

@@ -83,10 +83,6 @@ export default function Login() {
       toast.success("Login successful!");
       setLoading(false);
       NProgress.done();
-      const storedTheme = localStorage.getItem("theme");
-      if (!storedTheme) {
-        localStorage.setItem("theme", "dark");
-      }
       navigate("/");
     }, 2000);
   };

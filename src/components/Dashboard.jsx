@@ -286,85 +286,88 @@ export default function Dashboard() {
       </div>
       {/* Right Sidebar */}
       <div
-        className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
-          rightSidebarOpen ? "translate-x-0" : "translate-x-full"
-        } w-72 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
-      >
-        <div className="mb-8 h-full ">
-          <span className="text-sm border-b-2 max-h-full  text-black dark:text-white mx-auto mb-3">
-            <div className="flex justify-between items-center mb-4">
-              <div> </div>
-            </div>
-            <ul className="space-y-4 cursor-pointer ">
-              <li className="flex justify-between items-center border p-2   ">
-                <Checkbox checked />
-                <span>Buy groceries</span>
-                <Button variant="ghost" size="icon">
-                  <Star className="h-4 w-4" />
-                </Button>
-              </li>
-              <li className="flex items-center gap-2 border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800    ">
-                <Plus className="h-4 w-4" />
-                <span className="py-1">Add Step</span>
-              </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2  ">
-                <Bell className="h-4 w-4" />
-                <span className="py-1">Set Reminder</span>
-              </li>
-              <li onClick={toggleCalendar} className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800  space-x-2 ">
-                <Calendar className="h-4 w-4"  />
-                <span className="py-1">Add Due Date</span>
-              </li>
-              {calendarVisible && (
-          <MyCalendar
-            onChange={(date) => {
-              setSelectedDate(date);
-              setCalendarVisible(false);
-              toast.success(`Selected Date: ${date.toLocaleDateString()}`);
-            }}
-            value={selectedDate}
-            className="border dark:bg-[#2F3630] dark:text-white"
-          />
-        )}
-           <p className="mt-4 text-xs">
-           {selectedDate && (
-  <>
-    Selected Date: <span className="vv">{selectedDate.toDateString()}</span>
-  </>
-)}
-
-      </p>
-              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2   ">
-                <Repeat className="h-4 w-4" />
-                <span className="py-1">Repeat</span>
-              </li>
-              <li className="flex items-center  border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2    ">
-                <Notebook className="h-4 w-4" />
-                <span className="py-1">Add Notes</span>
-              </li>
-            </ul>
-
-            <div className="flex justify-between w-[90%] items-center absolute bottom-0 mx-auto mb-5">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setRightSidebarOpen(false)}
-              >
-                <X className="h-10 w-10" />
-              </Button>
-              <div>Created Today</div>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleDeleteAllTasks}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-            </div>
-          </span>
-        </div>
+  className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
+    rightSidebarOpen ? "translate-x-0" : "translate-x-full"
+  } w-72 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
+>
+  <div className="mb-8 h-full">
+    <span className="text-sm border-b-2 max-h-full text-black dark:text-white mx-auto mb-3">
+      <div className="flex justify-between items-center mb-4">
+        <div></div>
       </div>
+      <ul className="space-y-4 cursor-pointer">
+        <li className="flex justify-between items-center border p-2">
+          <Checkbox checked />
+          <span className="text-sm">Buy groceries</span>
+          <Button variant="ghost" size="icon">
+            <Star className="h-4 w-4" />
+          </Button>
+        </li>
+        <li className="flex items-center gap-2 border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800">
+          <Plus className="h-4 w-4" />
+          <span className="py-1">Add Step</span>
+        </li>
+        <li className="flex items-center border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2">
+          <Bell className="h-4 w-4" />
+          <span className="py-1">Set Reminder</span>
+        </li>
+        <li
+          onClick={toggleCalendar}
+          className="flex items-center border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2"
+        >
+          <Calendar className="h-4 w-4" />
+          <span className="py-1">Add Due Date</span>
+        </li>
+        {calendarVisible && (
+         <MyCalendar
+         onChange={(date) => {
+           setSelectedDate(date);
+           setCalendarVisible(false);
+           toast.success(`Selected Date: ${date.toLocaleDateString()}`);
+         }}
+         value={selectedDate}
+         className="react-calendar" // Apply the custom class for styling
+       />
+       
+        )}
+        <p className="mt-4 text-xs">
+          {selectedDate && (
+            <>
+              Selected Date: <span className="vv">{selectedDate.toDateString()}</span>
+            </>
+          )}
+        </p>
+        <li className="flex items-center border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2">
+          <Repeat className="h-4 w-4" />
+          <span className="py-1">Repeat</span>
+        </li>
+        <li className="flex items-center border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2">
+          <Notebook className="h-4 w-4" />
+          <span className="py-1">Add Notes</span>
+        </li>
+      </ul>
+
+      <div className="flex justify-between w-full items-center absolute bottom-0 mx-auto mb-5 px-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setRightSidebarOpen(false)}
+        >
+          <X className="h-10 w-10" />
+        </Button>
+        <div className="text-xs sm:text-sm">Created Today</div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleDeleteAllTasks}
+        >
+          <Trash2 className="h-4 w-4" />
+        </Button>
+      </div>
+    </span>
+  </div>
+</div>
+
       <div className="flex-1 overflow-auto">
         <header className="fixed top-0 left-0 w-full z-10 flex items-center justify-between border-b bg-white dark:bg-[#232323] p-4">
           <Button
