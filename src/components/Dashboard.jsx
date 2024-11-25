@@ -287,7 +287,7 @@ export default function Dashboard() {
       </div>
       {/* Right Sidebar */}
       <div
-  className={`fixed lg:mt-[5%] mt-[17%]  z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
+  className={`fixed lg:mt-[5%] mt-[17%] md:mt-[10%] z-30 top-0 right-0 transform transition-transform duration-300 h-[90%] ${
     rightSidebarOpen ? "translate-x-0" : "translate-x-full"
   } w-72 border-l bg-[#EEF6EF] dark:bg-[#232323] p-4`}
 >
