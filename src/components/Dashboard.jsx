@@ -421,9 +421,11 @@ export default function Dashboard() {
             <ModeToggle />
           </div>
         </header>
-        <main className="p-6 overflow-auto mt-10">
-          <Outlet />
-        </main>
+        <main className="overflow-auto mt-16 h-[125vh] w-full">
+  <Outlet />
+</main>
+
+
       </div>
     </div>
   );
