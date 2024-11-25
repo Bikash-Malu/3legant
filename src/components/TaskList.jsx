@@ -21,11 +21,16 @@ import { useLocation } from "react-router-dom";
 
 const TaskList = () => {
   const dispatch = useDispatch();
-  const { list: tasks, loading } = useSelector((state) => state.tasks);
-  const [newTask, setNewTask] = useState("");
-  const [calendarVisible, setCalendarVisible] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const { list: tasks} = useSelector((state) => state.tasks);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false); 
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+  const [newTask, setNewTask] = useState("");
   const location = useLocation();
   const query = location.state?.query || "";
   const filteredTasks = tasks.filter((task) =>
