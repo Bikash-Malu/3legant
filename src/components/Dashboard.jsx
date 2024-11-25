@@ -326,17 +326,11 @@ export default function Dashboard() {
            toast.success(`Selected Date: ${date.toLocaleDateString()}`);
          }}
          value={selectedDate}
-         className="react-calendar" // Apply the custom class for styling
+         className="react-calendar"
        />
        
         )}
-        <p className="mt-4 text-xs">
-          {selectedDate && (
-            <>
-              Selected Date: <span className="vv">{selectedDate.toDateString()}</span>
-            </>
-          )}
-        </p>
+      
         <li className="flex items-center border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800 space-x-2">
           <Repeat className="h-4 w-4" />
           <span className="py-1">Repeat</span>
