@@ -90,13 +90,18 @@ const TaskList = () => {
   return (
     <main className="p-4 dark:bg-[#242424] z-10">
       <div
-        className="mb-6"
+        className="mb-6 dark:bg-[#2F3630]"
+        style={{
+          backgroundImage:
+            "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
+        }}
     
       >
         <input
           type="text"
           autoFocus={false}
           value={newTask}
+          
           onChange={(e) => setNewTask(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -104,17 +109,13 @@ const TaskList = () => {
             }
           }}
           style={{
-            backgroundImage:
-              "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
+            backgroundColor: "transparent",
           }}
-          className="w-full px-4  dark:bg-[#2F3630] outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
+          className="w-full px-4   outline-none rounded-none border-none h-20 focus:ring-0 dark:text-white dark:placeholder-white"
           placeholder="Add A Task"
         />
 
-        <div className="flex items-center justify-between   py-2" style={{
-            backgroundImage:
-              "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
-          }}>
+        <div className="flex items-center justify-between   py-2 ">
           <div className="flex gap-2">
             <Button variant="ghost" size="icon">
               <Bell className="h-4 w-4 text-[#232323] dark:text-white" />
