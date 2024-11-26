@@ -266,8 +266,9 @@ export default function Dashboard() {
               <CircularProgressbar
                 value={progress || progressPercentage}
                 text={`${Math.round(progressPercentage)}%`}
-                strokeWidth={18}
+                strokeWidth={16}
                 styles={buildStyles({
+                  strokeLinecap: "butt",
                   textColor: "#10B981",
                   pathColor: "#142E15",
                   trailColor: "#3F9142",
