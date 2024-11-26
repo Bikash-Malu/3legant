@@ -116,10 +116,12 @@ const TaskList = () => {
 
         <div className="flex items-center justify-between   py-2 ">
           <div className="flex gap-2">
-            <Button variant="ghost" size="icon">
+            <Button
+            className='hover:bg-transparent' variant="ghost" size="icon">
               <Bell className="h-4 w-4 text-[#232323] dark:text-white" />
             </Button>
             <Button
+            className='hover:bg-transparent'
               variant="ghost"
               size="icon"
               onClick={() => {
@@ -142,10 +144,11 @@ const TaskList = () => {
               </svg>
             </Button>
             <Button
+            
               variant="ghost"
               size="icon"
              
-              className="dark:text-white"
+              className="hover:bg-transparent dark:text-white"
             >
               <svg
                 width="20"
@@ -167,8 +170,9 @@ const TaskList = () => {
             </Button>
           </div>
           <Button
+          
             onClick={addTask}
-            className="bg-green-100 text-green-500 hover:bg-green-200 dark:bg-green-900 dark:text-white dark:hover:bg-green-700 mx-2"
+            className="hover:bg-transparent bg-green-100 text-green-500 hover:bg-green-200 dark:bg-green-900 dark:text-white dark:hover:bg-green-700 mx-2"
           >
             ADD TASK
           </Button>
@@ -214,6 +218,7 @@ const TaskList = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Button
+                      className='hover:bg-transparent'
                         variant="ghost"
                         size="icon"
                         onClick={() => dispatch(toggleTaskImportance(task.id))}
@@ -228,6 +233,7 @@ const TaskList = () => {
                         />
                       </Button>
                       <Button
+                      className='hover:bg-transparent'
                         variant="ghost"
                         size="icon"
                         onClick={() => handleDeleteTask(task.id)}
@@ -277,6 +283,7 @@ const TaskList = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
+                  className='hover:bg-transparent'
                     variant="ghost"
                     size="icon"
                     onClick={() => dispatch(toggleTaskImportance(task.id))}
@@ -290,6 +297,7 @@ const TaskList = () => {
                     />
                   </Button>
                   <Button
+                  className='hover:bg-transparent'
                     variant="ghost"
                     size="icon"
                     onClick={() => handleDeleteTask(task.id)}
