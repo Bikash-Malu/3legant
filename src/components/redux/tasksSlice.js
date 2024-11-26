@@ -1,14 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-const response = await axios.get(
-  "https://mocki.io/v1/ba43e6bf-766f-41da-9112-344ca76d2db2"
-);
+const defaultTasks = [
+  { id: 1, text: "Buy groceries", completed: false, important: false },
+  { id: 2, text: "Finish project report", completed: false, important: true },
+  { id: 3, text: "Call the bank", completed: false, important: false },
+  { id: 4, text: "Schedule dentist appointment", completed: false, important: false },
+  { id: 5, text: "Plan weekend trip", completed: false, important: false },
+  { id: 6, text: "Read a book", completed: true, important: false },
+  { id: 7, text: "Clean the house", completed: true, important: false },
+  { id: 8, text: "Prepare presentation", completed: true, important: false },
+  { id: 9, text: "Update blog", completed: true, important: false },
+];
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState: {
-    list: response.data,
+    list: defaultTasks,
     loading: false,
   },
   reducers: {
