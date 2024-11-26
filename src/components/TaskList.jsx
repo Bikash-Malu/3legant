@@ -95,7 +95,6 @@ const TaskList = () => {
           backgroundImage:
             "linear-gradient(0deg, rgba(53, 121, 55, 0.1) 0%, rgba(208, 255, 210, 0.1) 100%)",
         }}
-    
       >
         <input
           type="text"

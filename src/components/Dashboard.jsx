@@ -51,10 +51,12 @@ export default function Dashboard() {
   const toggleCalendar = () => {
     setCalendarVisible(!calendarVisible);
   };
+  
   const completedTasks = tasks.filter((task) => task.completed).length;
   const totalTasks = tasks.length;
   const progressPercentage = (completedTasks / totalTasks) * 100;
   const location = useLocation();
+  const visibleUrl = "/task";
 
   const getActiveClass = (path) =>
     location.pathname === path
@@ -129,7 +131,7 @@ export default function Dashboard() {
     setShowCalendar(false);
   };
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-[#242424]">
+    <div className="flex min-h-[100%] bg-gray-50 dark:bg-[#242424]">
       <LoadingBar
         color="#10B981"
         progress={progress}
@@ -137,7 +139,7 @@ export default function Dashboard() {
         className="z-50"
       />
       <div
-     className={`absolute h-[100%] lg:relative z-20 transform transition-transform duration-300 ${
+     className={`absolute h-[100vh] lg:relative z-20 transform transition-transform duration-300 ${
       sidebarOpen ? "translate-x-0" : "-translate-x-full"
     } w-64 border-r bg-white dark:bg-[#232323] p-4 lg:translate-x-0`}
     
@@ -375,29 +377,34 @@ export default function Dashboard() {
           </Button>
 
           <div className="flex items-center gap-2 justify-end w-full">
-            <motion.div
-              initial={{ width: 40 }}
-              animate={{ width: isSearchOpen ? 200 : 40 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
-            >
-              <input
-                type="text"
-                placeholder="Search tasks..."
-                className={`${
-                  isSearchOpen ? "w-full p-2" : "w-0"
-                } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
-                value={query}
-                onChange={handleSearch}
-                style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
-              />
-              <button
-                onClick={() => setIsSearchOpen((prev) => !prev)}
-                className="p-2"
-              >
-                <Search className="h-5 w-5 text-black dark:text-white" />
-              </button>
-            </motion.div>
+          {location.pathname === visibleUrl && (
+        <motion.div
+          initial={{ width: 40 }}
+          animate={{ width: isSearchOpen ? 200 : 40 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative flex items-center overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-full"
+        >
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            className={`${
+              isSearchOpen ? "w-full p-2" : "w-0"
+            } bg-transparent text-sm text-gray-500 dark:text-black outline-none transition-all duration-200 dark:bg-white bg-gray-800`}
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              handleSearch(e);
+            }}
+            style={{ visibility: isSearchOpen ? "visible" : "hidden" }}
+          />
+          <button
+            onClick={() => setIsSearchOpen((prev) => !prev)}
+            className="p-2"
+          >
+            <Search className="h-5 w-5 text-black dark:text-white" />
+          </button>
+        </motion.div>
+      )}
 
             <Button
               onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
