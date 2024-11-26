@@ -196,7 +196,7 @@ export default function Dashboard() {
             <nav className="space-y-2 bg-white dark:bg-[#232323] rounded-md">
               <Button
                 variant="ghost"
-                className={`w-full justify-start gap-2 ${getActiveClass(
+                className={`w-full hover:bg-transparent justify-start gap-2 ${getActiveClass(
                   "/task"
                 )}`}
               >
@@ -205,7 +205,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full justify-start gap-2 ${getActiveClass(
+                className={`w-full hover:bg-transparent justify-start gap-2 ${getActiveClass(
                   "/today"
                 )}`}
               >
@@ -214,7 +214,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full justify-start gap-2 ${getActiveClass(
+                className={`w-full hover:bg-transparent justify-start gap-2 ${getActiveClass(
                   "/importance"
                 )}`}
               >
@@ -223,7 +223,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full justify-start gap-2 ${getActiveClass(
+                className={`w-full hover:bg-transparent justify-start gap-2 ${getActiveClass(
                   "/planned"
                 )}`}
               >
@@ -232,7 +232,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 variant="ghost"
-                className={`w-full justify-start gap-2 ${getActiveClass(
+                className={`w-full hover:bg-transparent justify-start gap-2 ${getActiveClass(
                   "/assign"
                 )}`}
               >
@@ -244,7 +244,7 @@ export default function Dashboard() {
 
           <Button
             variant="ghost"
-            className="w-full justify-start gap-2 bg-white dark:bg-[#232323] py-10"
+            className="w-full hover:bg-transparent justify-start gap-2 bg-white dark:bg-[#232323] py-10"
           >
             <Plus className="h-4 w-4 text-[#232323] dark:text-white" />
             Add list
@@ -302,11 +302,11 @@ export default function Dashboard() {
         <li className="flex justify-between items-center border p-2">
           <Checkbox checked />
           <span className="text-sm">Buy groceries</span>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" className="hover:bg-transparent" size="icon">
             <Star className="h-4 w-4" />
           </Button>
         </li>
-        <li className="flex items-center gap-2 border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800">
+        <li className=" flex items-center gap-2 border-b-2 border-b-gray-700 hover:bg-gray-200 py-1 rounded-sm dark:hover:bg-gray-800">
           <Plus className="h-4 w-4" />
           <span className="py-1">Add Step</span>
         </li>
@@ -346,6 +346,7 @@ export default function Dashboard() {
 
       <div className="flex justify-between w-full items-center absolute bottom-0  mb-5 pr-10">
         <Button
+        className="hover:bg-transparent"
           variant="ghost"
           size="icon"
           onClick={() => setRightSidebarOpen(false)}
@@ -354,6 +355,7 @@ export default function Dashboard() {
         </Button>
         <div className="text-xs sm:text-sm">Created Today</div>
         <Button
+        className="hover:bg-transparent"
           variant="ghost"
           size="icon"
           onClick={handleDeleteAllTasks}
@@ -370,7 +372,7 @@ export default function Dashboard() {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden hover:bg-transparent"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             <Menu className="h-14 w-14 text-2xl text-black dark:text-white" />
@@ -407,6 +409,7 @@ export default function Dashboard() {
       )}
 
             <Button
+            className="hover:bg-transparent"
               onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
               variant="ghost"
               size="icon"
@@ -421,7 +424,7 @@ export default function Dashboard() {
               onClick={handleLogout}
               variant="ghost"
               size="icon"
-              className="text-red-600 dark:text-white"
+              className="text-red-600 dark:text-white hover:bg-transparent"
             >
               <LogOut className="h-6 w-6 text-black dark:text-white" />
             </Button>

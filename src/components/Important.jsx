@@ -66,9 +66,9 @@ const Important = () => {
                 />
                 <span className="dark:text-white">{task.text}</span>
               </div>
-              <Button variant="ghost" size="icon" onClick={() => {}}>
+              <Button variant="ghost" size="icon" onClick={() => {}} className="hover:bg-transparent">
                 <Star
-                  className="h-4 w-4 fill-current text-yellow-500 dark:text-yellow-400"
+                  className=" h-4 w-4 fill-current text-yellow-500 dark:text-yellow-400"
                 />
               </Button>
             </div>
